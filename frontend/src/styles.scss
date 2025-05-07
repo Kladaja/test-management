@@ -1,10 +1,32 @@
 body {
+    margin: 0;
+    padding: 0;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 app-root {
     width: 100%;
+}
+
+.logged-in {
+    main {
+        display: block;
+        padding-top: 60px;
+    }
+}
+
+.logged-out {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    main {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding-top: 0;
+    }
 }

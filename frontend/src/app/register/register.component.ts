@@ -22,11 +22,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      name: [''],
-      address: [''],
-      nickname: [''],
+      firstName: [''],
+      lastName: [''],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      role: ['tester', Validators.required]
     }, {
       validator: this.mustMatch('password', 'confirmPassword')
     })
@@ -55,6 +55,7 @@ export class RegisterComponent implements OnInit {
         next: (data) => {
           console.log(data);
         }, error: (err) => {
+          console.log(this.registerForm.value);
           console.log(err);
         }
       });

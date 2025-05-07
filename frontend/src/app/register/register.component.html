@@ -5,9 +5,8 @@
             <p *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.errors!['required']">Email is required.</p>
             <p *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.errors!['email']">Please enter a valid email.</p>
         </div>
-        <input formControlName="name" type="text" placeholder="Name" />
-        <input formControlName="address" type="text" placeholder="Address" />
-        <input formControlName="nickname" type="text" placeholder="Nickname" />
+        <input formControlName="firstName" type="text" placeholder="First name" />
+        <input formControlName="lastName" type="text" placeholder="Last name" />
         <input formControlName="password" type="password" placeholder="Password" required [ngClass]="{'invalid-input': registerForm.get('password')?.errors}" />
         <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
             <p *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.errors!['required']">Password is required.</p>
@@ -18,6 +17,13 @@
             <p *ngIf="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.errors!['required']">Confirming password is required.</p>
             <p *ngIf="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.errors!['mustMatch']">Passwords must match.</p>
         </div>
+        <select formControlName="role">
+            <option value="tester">Tester</option>
+            <option value="manager">Test Manager</option>
+          </select>
+          <div *ngIf="registerForm.get('role')?.invalid && (registerForm.get('role')?.dirty || registerForm.get('role')?.touched)">
+            <p *ngIf="registerForm.get('role')?.errors?.['required']">Role is required.</p>
+          </div>
         <div class="buttons">
             <button type="submit">Sign Up</button>
         </div>

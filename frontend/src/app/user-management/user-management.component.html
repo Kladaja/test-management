@@ -3,17 +3,19 @@
         <thead>
             <tr>
                 <th>Email</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Nickname</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Role</th>
+                <th>Projects</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let user of users">
                 <td>{{user.email}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.address}}</td>
-                <td>{{user.nickname}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.role}}</td>
+                <td><i>// TODO</i></td>
             </tr>
         </tbody>
     </table>
@@ -21,7 +23,3 @@
 <ng-template #noUsersTemplate>
     <p>No users available.</p>
 </ng-template>
-
-<div class="buttons">
-    <button type="reset" (click)="logout()">Logout</button>
-</div>

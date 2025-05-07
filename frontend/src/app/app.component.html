@@ -1,1 +1,6 @@
-<router-outlet />
+<div [class.logged-in]="loggedIn$ | async" [class.logged-out]="!(loggedIn$ | async)">
+    <app-navbar *ngIf="loggedIn$ | async" />
+    <main>
+        <router-outlet />
+    </main>
+</div>  

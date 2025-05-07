@@ -28,10 +28,10 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
     router.post('/register', (req: Request, res: Response) => {
         const email = req.body.email;
         const password = req.body.password;
-        const name = req.body.name;
-        const address = req.body.address;
-        const nickname = req.body.nickname;
-        const user = new User({ email: email, password: password, name: name, address: address, nickname: nickname });
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName;
+        const role = req.body.role;
+        const user = new User({ email: email, password: password, firstName: firstName, lastName: lastName, role: role });
         user.save().then(data => {
             res.status(200).send(data);
         }).catch(error => {

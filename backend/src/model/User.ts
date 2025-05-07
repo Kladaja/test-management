@@ -5,19 +5,19 @@ const SALT_FACTOR = 10;
 
 interface IUser extends Document {
     email: string;
-    name?: string;
-    address?: string;
-    nickname?: string;
+    firstName?: string;
+    lastName?: string;
     password: string;
+    role: 'manager' | 'tester';
     comparePassword: (candidatePassword: string, callback: (error: Error | null, isMatch: boolean) => void) => void;
 }
 
 const UserSchema: Schema<IUser> = new mongoose.Schema({
     email: { type: String, required: true },
-    name: { type: String, required: false },
-    address: { type: String, required: false },
-    nickname: { type: String, required: false },
-    password: { type: String, required: true }
+    firstName: { type: String, required: false },
+    lastName: { type: String, required: false },
+    password: { type: String, required: true },
+    role: { type: String, enum: ['manager', 'tester'], required: true }
 });
 
 UserSchema.pre<IUser>('save', function (next) {

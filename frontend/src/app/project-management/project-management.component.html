@@ -1,0 +1,21 @@
+<div class="table-container" *ngIf="projects && projects.length; else noProjectsTemplate">
+  <table>
+    <thead>
+      <tr>
+        <th>Project Name</th>
+        <th>Description</th>
+        <th>Created By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of projects">
+        <td>{{ project.name }}</td>
+        <td>{{ project.description }}</td>
+        <td>{{ project.createdBy }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noProjectsTemplate>
+  <p>No projects found.</p>
+</ng-template>  
