@@ -15,6 +15,6 @@ Database:
 
 Example endpoint calls:
 
-- Register: `curl -X POST -d "email=test.user@example.com&password=Test1234" localhost:5000/app/register`
-- Login: `curl -X POST -d "username=test.user@example.com&password=Test1234" localhost:5000/app/login`
+- Register: `curl -X POST -d "email=test@example.com&password=Test1234" localhost:5000/app/register`
+- Login: `curl -X POST -d "username=test@example.com&password=Test1234" localhost:5000/app/login`
 - Logout: `curl -X POST localhost:5000/app/logout`

@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import expressSession from 'express-session';
 import passport from 'passport';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import { configureRoutes } from './routes/routes';
 import { configurePassport } from './passport/passport';
 
@@ -17,6 +18,19 @@ mongoose.connect(dbUrl).then((_) => {
     console.log(error);
     return;
 });
+
+const whitelist = ['*', 'http://localhost:4200']
+const corsOptions = {
+    origin: (origin: string | undefined, callback: (err: Error | null, allowed?: boolean) => void) => {
+        if (whitelist.indexOf(origin!) !== -1 || whitelist.includes('*')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS.'));
+        }
+    },
+    credentials: true
+};
+app.use(cors(corsOptions));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 

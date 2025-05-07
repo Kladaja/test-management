@@ -1,21 +1,26 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-register',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent implements OnInit {
-  signupForm!: FormGroup;
+  registerForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private location: Location) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private location: Location,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
-    this.signupForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       name: [''],
       address: [''],
@@ -45,8 +50,14 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.signupForm.valid) {
-      console.log('Form data:', this.signupForm.value);
+    if (this.registerForm.valid) {
+      this.authService.register(this.registerForm.value).subscribe({
+        next: (data) => {
+          console.log(data);
+        }, error: (err) => {
+          console.log(err);
+        }
+      });
     } else {
       console.log('Form is not valid.');
     }

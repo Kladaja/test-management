@@ -28,7 +28,10 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
     router.post('/register', (req: Request, res: Response) => {
         const email = req.body.email;
         const password = req.body.password;
-        const user = new User({ email: email, password: password });
+        const name = req.body.name;
+        const address = req.body.address;
+        const nickname = req.body.nickname;
+        const user = new User({ email: email, password: password, name: name, address: address, nickname: nickname });
         user.save().then(data => {
             res.status(200).send(data);
         }).catch(error => {
@@ -47,6 +50,28 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
             })
         } else {
             res.status(500).send('User is not logged in.');
+        }
+    });
+
+    router.get('/getAllUsers', (req: Request, res: Response) => {
+        if (req.isAuthenticated()) {
+            const query = User.find();
+            query.then(data => {
+                res.status(200).send(data);
+            }).catch(error => {
+                console.log(error);
+                res.status(500).send('Internal server error.');
+            })
+        } else {
+            res.status(500).send('User is not logged in.');
+        }
+    });
+
+    router.get('/checkAuth', (req: Request, res: Response) => {
+        if (req.isAuthenticated()) {
+            res.status(200).send(true);
+        } else {
+            res.status(500).send(false);
         }
     });
 
