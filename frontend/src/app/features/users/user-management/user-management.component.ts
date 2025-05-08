@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../shared/model/User';
-import { UserService } from '../shared/services/user.service';
-import { AuthService } from '../shared/services/auth.service';
+import { User } from '../../../shared/model/User';
+import { UserService } from '../../../shared/services/user.service';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-user-management',

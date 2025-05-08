@@ -67,6 +67,14 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
         }
     });
 
+    router.get('/getCurrentUser', (req: Request, res: Response) => {
+        if (req.isAuthenticated()) {
+            res.status(200).send(req.user);
+        } else {
+            res.status(401).send('User is not authenticated.');
+        }
+    });
+
     router.get('/checkAuth', (req: Request, res: Response) => {
         if (req.isAuthenticated()) {
             res.status(200).send(true);

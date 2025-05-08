@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Project } from '../shared/model/Project';
-import { ProjectService } from '../shared/services/project.service';
+import { Project } from '../../../shared/model/Project';
+import { ProjectService } from '../../../shared/services/project.service';
 
 @Component({
   selector: 'app-project-management',

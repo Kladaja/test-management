@@ -13,12 +13,12 @@ interface IUser extends Document {
 }
 
 const UserSchema: Schema<IUser> = new mongoose.Schema({
-    email: { type: String, required: true },
+    email: { type: String, required: true, index: true },
     firstName: { type: String, required: false },
     lastName: { type: String, required: false },
     password: { type: String, required: true },
     role: { type: String, enum: ['manager', 'tester'], required: true }
-});
+}, { timestamps: true });
 
 UserSchema.pre<IUser>('save', function (next) {
     const user = this;
