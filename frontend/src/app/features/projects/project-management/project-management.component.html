@@ -1,21 +1,37 @@
 <div class="table-container" *ngIf="projects && projects.length; else noProjectsTemplate">
-  <table>
-    <thead>
-      <tr>
-        <th>Project Name</th>
-        <th>Description</th>
-        <th>Created By</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let project of projects">
-        <td>{{ project.name }}</td>
-        <td>{{ project.description }}</td>
-        <td>{{ project.createdBy }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <mat-card>
+    <mat-card-title>Projects</mat-card-title>
+
+    <div class="buttons">
+      <button mat-raised-button color="primary" (click)="navigate('/project-form')">Create project</button>
+    </div>
+
+    <mat-table [dataSource]="projects" class="mat-elevation-z2">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Project Name </mat-header-cell>
+        <mat-cell *matCellDef="let project"> {{ project.name }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+        <mat-cell *matCellDef="let project"> {{ project.description }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="createdBy">
+        <mat-header-cell *matHeaderCellDef> Created By </mat-header-cell>
+        <mat-cell *matCellDef="let project"> {{ project.createdBy }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card>
 </div>
+
 <ng-template #noProjectsTemplate>
-  <p>No projects found.</p>
-</ng-template>  
+  <mat-card>
+    <mat-card-content>
+      <p>No projects found.</p>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

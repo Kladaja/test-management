@@ -1,15 +1,22 @@
 <div class="login-container">
-    <form class="login-form" (ngSubmit)="login()">
-        <input [(ngModel)]="email" name="email" type="email" placeholder="Email" required />
-        <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required />
-        <div class="buttons">
-            <button type="submit">Login</button>
-        </div>
-        <div class="buttons">
-            <button type="button" (click)="navigate('/register')">Sign Up</button>
-        </div>
-        <div *ngIf="errorMessage">
-            <p>{{errorMessage}}</p>
-        </div>
-    </form>
+  <form class="login-form" (ngSubmit)="login()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="email" name="email" type="email" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput [(ngModel)]="password" name="password" type="password" required />
+    </mat-form-field>
+
+    <div class="buttons">
+      <button mat-raised-button color="primary" type="submit">Login</button>
+      <button mat-button type="button" color="accent" (click)="navigate('/register')">Sign Up</button>
+    </div>
+
+    <mat-error *ngIf="errorMessage">
+      {{ errorMessage }}
+    </mat-error>
+  </form>
 </div>

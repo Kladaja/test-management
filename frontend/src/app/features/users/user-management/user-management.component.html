@@ -1,25 +1,45 @@
 <div class="table-container" *ngIf="users && users.length; else noUsersTemplate">
-    <table>
-        <thead>
-            <tr>
-                <th>Email</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Role</th>
-                <th>Projects</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users">
-                <td>{{user.email}}</td>
-                <td>{{user.firstName}}</td>
-                <td>{{user.lastName}}</td>
-                <td>{{user.role}}</td>
-                <td><i>// TODO</i></td>
-            </tr>
-        </tbody>
-    </table>
+  <mat-card>
+    <mat-card-title>Registered Users</mat-card-title>
+    <mat-table [dataSource]="users" class="mat-elevation-z2">
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.firstName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.lastName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.role }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="projects">
+        <mat-header-cell *matHeaderCellDef>Projects</mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <i>// TODO</i>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card>
 </div>
+
 <ng-template #noUsersTemplate>
-    <p>No users available.</p>
+  <mat-card>
+    <mat-card-content>
+      <p>No users available.</p>
+    </mat-card-content>
+  </mat-card>
 </ng-template>

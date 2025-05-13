@@ -1,23 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { Project } from '../model/Project';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  private baseUrl = 'http://localhost:5000/app/projects';
 
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.baseUrl);
+    return this.http.get<Project[]>('http://localhost:5000/app/getAllProjects', { withCredentials: true });
   }
 
-  create(project: Project): Observable<Project> {
-    return this.http.post<Project>(this.baseUrl, project);
+  createProject(project: Project): Observable<any> {
+    const body = new URLSearchParams();
+    body.set('name', project.name);
+    body.set('description', project.description || '');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    return this.http.post('http://localhost:5000/app/addProject', body, { headers: headers, withCredentials: true });
   }
 
-  // későbbiekben lehet update, delete stb.
+  /*
+  updateProject(id: string, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}`, data);
+  }
+
+  getProjectById(id: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${id}`);
+  }
+  */
 }

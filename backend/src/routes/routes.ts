@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { PassportStatic } from "passport";
 import { User } from "../model/User";
+import { Project } from "../model/Project";
 
 export const configureRoutes = (passport: PassportStatic, router: Router): Router => {
     router.post('/login', (req: Request, res: Response, next: NextFunction) => {
@@ -81,6 +82,27 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
         } else {
             res.status(500).send(false);
         }
+    });
+
+    router.get('/getAllProjects', async (req: Request, res: Response) => {
+        try {
+            const projects = await Project.find().populate('createdBy', 'email').exec();
+            res.status(200).json(projects);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Hiba a projektek lekérése során.');
+        }
+    });
+
+    router.post('/addProject', (req: Request, res: Response) => {
+        const name = req.body.name;
+        const description = req.body.description;
+        const project = new Project({ name: name, description: description, createdBy: (req.user as any)._id, testers: [] });
+        project.save().then(data => {
+            res.status(200).send(data);
+        }).catch(error => {
+            res.status(500).send(error);
+        })
     });
 
     return router;

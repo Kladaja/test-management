@@ -1,34 +1,48 @@
-<div class="login-container">
-    <form class="login-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <input formControlName="email" type="email" placeholder="Email" required [ngClass]="{'invalid-input': registerForm.get('email')?.errors}" />
-        <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
-            <p *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.errors!['required']">Email is required.</p>
-            <p *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.errors!['email']">Please enter a valid email.</p>
-        </div>
-        <input formControlName="firstName" type="text" placeholder="First name" />
-        <input formControlName="lastName" type="text" placeholder="Last name" />
-        <input formControlName="password" type="password" placeholder="Password" required [ngClass]="{'invalid-input': registerForm.get('password')?.errors}" />
-        <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
-            <p *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.errors!['required']">Password is required.</p>
-            <p *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.errors!['minlength']">Password must be at least 6 characters.</p>
-        </div>
-        <input formControlName="confirmPassword" type="password" placeholder="Confirm password" required [ngClass]="{'invalid-input': registerForm.get('confirmPassword')?.errors}" />
-        <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)">
-            <p *ngIf="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.errors!['required']">Confirming password is required.</p>
-            <p *ngIf="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.errors!['mustMatch']">Passwords must match.</p>
-        </div>
-        <select formControlName="role">
-            <option value="tester">Tester</option>
-            <option value="manager">Test Manager</option>
-          </select>
-          <div *ngIf="registerForm.get('role')?.invalid && (registerForm.get('role')?.dirty || registerForm.get('role')?.touched)">
-            <p *ngIf="registerForm.get('role')?.errors?.['required']">Role is required.</p>
-          </div>
-        <div class="buttons">
-            <button type="submit">Sign Up</button>
-        </div>
-        <div class="buttons">
-            <button type="reset" (click)="goBack()">Back</button>
-        </div>
-    </form>
+<div class="form-container">
+  <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" required />
+      <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Email is required.</mat-error>
+      <mat-error *ngIf="registerForm.get('email')?.hasError('email')">Enter a valid email.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password" required />
+      <mat-error *ngIf="registerForm.get('password')?.hasError('required')">Password is required.</mat-error>
+      <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">Password must be at least 6 characters.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput formControlName="confirmPassword" type="password" required />
+      <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required')">Confirming password is required.</mat-error>
+      <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('mustMatch')">Passwords must match.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role" required>
+        <mat-option value="tester">Tester</mat-option>
+        <mat-option value="manager">Test Manager</mat-option>
+      </mat-select>
+      <mat-error *ngIf="registerForm.get('role')?.hasError('required')">Role is required.</mat-error>
+    </mat-form-field>
+
+    <div class="buttons">
+      <button mat-raised-button color="primary" type="submit">Sign Up</button>
+      <button mat-button type="reset" color="warn" (click)="goBack()">Back</button>
+    </div>
+  </form>
 </div>
