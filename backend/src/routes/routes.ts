@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { PassportStatic } from "passport";
+
 import { User } from "../model/User";
 import { Project } from "../model/Project";
 
@@ -55,6 +56,7 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
     });
 
     router.get('/getAllUsers', (req: Request, res: Response) => {
+        if (!req.isAuthenticated()) { res.status(401).send('User is not authenticated.'); }
         if (req.isAuthenticated()) {
             const query = User.find();
             query.then(data => {
@@ -69,11 +71,8 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
     });
 
     router.get('/getCurrentUser', (req: Request, res: Response) => {
-        if (req.isAuthenticated()) {
-            res.status(200).send(req.user);
-        } else {
-            res.status(401).send('User is not authenticated.');
-        }
+        if (!req.isAuthenticated()) { res.status(401).send('User is not authenticated.'); }
+        res.status(200).send(req.user);
     });
 
     router.get('/checkAuth', (req: Request, res: Response) => {
@@ -85,25 +84,55 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
     });
 
     router.get('/getAllProjects', async (req: Request, res: Response) => {
+        if (!req.isAuthenticated()) { res.status(401).send('User is not authenticated.'); }
         try {
             const projects = await Project.find().populate('createdBy', 'email').exec();
             res.status(200).json(projects);
         } catch (error) {
             console.error(error);
-            res.status(500).send('Hiba a projektek lekérése során.');
+            res.status(500).send('Error fetching projects.');
+        }
+    });
+
+    router.get('/getProjectById/:id', async (req: Request, res: Response) => {
+        if (!req.isAuthenticated()) { res.status(401).send('User is not authenticated.'); }
+        try {
+            const project = await Project.findById(req.params.id).populate('createdBy', 'email').exec();
+            if (!project) {
+                res.status(404).send('Project not found.');
+            }
+            res.status(200).json(project);
+        } catch (error) {
+            res.status(500).send('Error fetching project.');
         }
     });
 
     router.post('/addProject', (req: Request, res: Response) => {
+        if (!req.isAuthenticated()) { res.status(401).send('User is not authenticated.'); }
         const name = req.body.name;
         const description = req.body.description;
         const project = new Project({ name: name, description: description, createdBy: (req.user as any)._id, testers: [] });
         project.save().then(data => {
             res.status(200).send(data);
         }).catch(error => {
-            res.status(500).send(error);
+            res.status(500).send('Error adding project.');
         })
     });
+
+    router.put('/updateProject/:id', async (req: Request, res: Response) => {
+        if (!req.isAuthenticated()) { res.status(401).send('User is not authenticated.'); }
+        try {
+            const project = await Project.findByIdAndUpdate(
+                req.params.id,
+                { name: req.body.name, description: req.body.description },
+                { new: true }
+            );
+            res.status(200).json(project);
+        } catch (err) {
+            res.status(500).send('Error updating project.');
+        }
+    });
+
 
     return router;
 }

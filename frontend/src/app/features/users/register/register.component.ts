@@ -1,6 +1,7 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
   imports: [
     ReactiveFormsModule,
     CommonModule,
+    MatCardModule,
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,

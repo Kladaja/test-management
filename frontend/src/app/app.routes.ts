@@ -10,5 +10,7 @@ export const routes: Routes = [
     { path: 'user-management', loadComponent: () => import('./features/users/user-management/user-management.component').then((c) => c.UserManagementComponent), canActivate: [authGuard] },
     { path: 'project-management', loadComponent: () => import('./features/projects/project-management/project-management.component').then((c) => c.ProjectManagementComponent), canActivate: [authGuard] },
     { path: 'project-form', loadComponent: () => import('./features/projects/project-form/project-form.component').then((c) => c.ProjectFormComponent), canActivate: [authGuard] },
+    { path: 'project-form/:id', loadComponent: () => import('./features/projects/project-form/project-form.component').then((c) => c.ProjectFormComponent), canActivate: [authGuard] },
+    { path: 'project-details/:id', loadComponent: () => import('./features/projects/project-details/project-details.component').then((c) => c.ProjectDetailsComponent), canActivate: [authGuard] },
     { path: '**', redirectTo: 'login' },
 ];

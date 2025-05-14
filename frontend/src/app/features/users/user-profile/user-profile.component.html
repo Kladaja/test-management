@@ -1,11 +1,23 @@
-<div class="profile-container">
-    <h2>Profile</h2>
-    <div *ngIf="user; else loading">
-    <p><strong>Name:</strong> {{ user.firstName }} {{ user.lastName }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Role:</strong> {{ user.role }}</p>
-    </div>
-    <ng-template #loading>
-    <p>Loading...</p>
-    </ng-template>
+<div class="page-container">
+  <ng-container *ngIf="user; else loading">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Profile</mat-card-title>
+            <button mat-icon-button matTooltip="Edit profile" aria-label="Edit profile" (click)="navigate('/profile-edit')">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>Name:</strong> {{ user.firstName }} {{ user.lastName }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Role:</strong> {{ user.role }}</p>
+      </mat-card-content>
+
+    </mat-card>
+  </ng-container>
+
+  <ng-template #loading>
+    <p>Loading profile...</p>
+  </ng-template>
 </div>

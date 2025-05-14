@@ -1,30 +1,113 @@
-html, body { height: 100%; }
-
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: rgb(0, 45, 71); }
-
-app-root {
-    width: 100%;
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(135deg, #0d47a1, #1976d2);
+  color: #212121;
 }
 
-.logged-in {
-    main {
-        display: block;
-        padding-top: 60px;
-    }
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.logged-in main {
+  padding-top: 64px;
+  flex-grow: 1;
 }
 
 .logged-out {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
-    main {
-        flex: 1 1 auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        padding-top: 0;
-    }
+  main {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+mat-card-title {
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+  font-size: 1.75rem !important;
+  font-weight: 600 !important;
+  color: #0d47a1 !important;
+}
+
+mat-card-header {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+
+mat-card-header button {
+  margin: 0;
+  padding: 0;
+}
+
+mat-label, mat-select {
+  color: #1565c0;
+}
+
+.mat-mdc-tooltip-surface {
+  background-color: #0d47a1 !important;
+  color: #ffffff !important;
+  font-size: 1rem;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  max-width: 220px !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+}
+
+.mdc-text-field__input, .mat-mdc-select {
+  color: #212121 !important;
+}
+
+.mat-mdc-raised-button.mat-primary {
+  background-color: #0d47a1 !important;
+  color: #ffffff !important;
+  border: 2px solid #0d47a1 !important;
+}
+
+.mat-mdc-raised-button.mat-primary:hover {
+  background-color: #1565c0 !important;
+  border-color: #1565c0 !important;
+}
+
+.mat-mdc-button {
+  background-color: #ffffff !important;
+  color: #0d47a1 !important;
+  border: 2px solid #0d47a1 !important;
+  border-radius: 6px;
+}
+
+.mat-mdc-button:hover {
+  background-color: #e3f2fd !important;
+  border-color: #1565c0 !important;
+  color: #0d47a1 !important;
+}
+
+.mat-mdc-icon-button {
+  margin-top: -5px;
+  margin-left: 10px;
+  background-color: #dbdbdb !important;
+  color: #0d47a1 !important;
+  border-radius: 6px;
+}
+
+.mat-mdc-icon-button:hover {
+  background-color: #d3d3d3 !important;
+  color: #0d47a1 !important;
+}
+
+mat-error {
+  margin-top: 0.5rem !important;
+  font-size: 0.875rem !important;
+  color: #d32f2f !important;
 }

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +16,7 @@ import { AuthService } from '../../../shared/services/auth.service';
     FormsModule,
     CommonModule,
     RouterModule,
+    MatCardModule,
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule

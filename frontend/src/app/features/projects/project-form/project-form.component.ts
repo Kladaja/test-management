@@ -1,12 +1,11 @@
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatError } from '@angular/material/form-field';
 
 import { ProjectService } from '../../../shared/services/project.service';
 
@@ -26,44 +25,46 @@ import { ProjectService } from '../../../shared/services/project.service';
 export class ProjectFormComponent implements OnInit {
   projectForm!: FormGroup;
   isEditMode = false;
+  projectId?: string;
 
-  constructor(
-    private router: Router,
-    private formBuilder: FormBuilder,
-    private location: Location,
-    private projectService: ProjectService,
-  ) { }
+  constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private projectService: ProjectService) { }
 
   ngOnInit() {
-    if (!this.isEditMode) {
-      this.projectForm = this.formBuilder.group({
-        name: ['', Validators.required],
-        description: ['']
-      });
-    }
+    this.projectForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      description: ['']
+    });
+
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.isEditMode = true;
+        this.projectId = id;
+        this.projectService.getProjectById(id).subscribe(project => {
+          this.projectForm.patchValue({
+            name: project.name,
+            description: project.description
+          });
+        });
+      }
+    });
   }
 
   onSubmit() {
     if (this.projectForm.valid) {
       if (!this.isEditMode) {
         this.projectService.createProject(this.projectForm.value).subscribe({
-          next: (data) => {
-            console.log(data);
-            this.router.navigate(['/project-management']);
-          }, error: (err) => {
-            console.log(this.projectForm.value);
-            console.log(err);
-          }
+          next: () => this.router.navigate(['/project-management']),
+          error: (err) => console.log(err)
         });
-      } else {
-
+      } else if (this.projectId) {
+        this.projectService.updateProject(this.projectId, this.projectForm.value).subscribe({
+          next: () => this.router.navigate(['/project-management']),
+          error: (err) => console.log(err)
+        });
       }
     } else {
       console.log('Form is not valid.');
     }
-  }
-
-  navigate(to: string) {
-    this.router.navigateByUrl(to);
   }
 }

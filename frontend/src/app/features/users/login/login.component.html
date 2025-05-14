@@ -1,22 +1,32 @@
 <div class="login-container">
-  <form class="login-form" (ngSubmit)="login()">
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput [(ngModel)]="email" name="email" type="email" required />
-    </mat-form-field>
+  <mat-card class="login-card" appearance="outlined">
+    <form class="login-form" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+      <mat-card-title>Login</mat-card-title>
 
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Password</mat-label>
-      <input matInput [(ngModel)]="password" name="password" type="password" required />
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="email" name="email" type="email" required email #emailInput="ngModel" />
+        <mat-error *ngIf="emailInput.invalid && emailInput.touched">
+          Please enter a valid email.
+        </mat-error>
+      </mat-form-field>
 
-    <div class="buttons">
-      <button mat-raised-button color="primary" type="submit">Login</button>
-      <button mat-button type="button" color="accent" (click)="navigate('/register')">Sign Up</button>
-    </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="password" name="password" type="password" required minlength="6" #passwordInput="ngModel" />
+        <mat-error *ngIf="passwordInput.invalid && passwordInput.touched">
+          Password is required (min 6 characters).
+        </mat-error>
+      </mat-form-field>
 
-    <mat-error *ngIf="errorMessage">
-      {{ errorMessage }}
-    </mat-error>
-  </form>
+      <div class="buttons">
+        <button mat-raised-button color="primary" type="submit">Login</button>
+        <button mat-button color="accent" type="button" (click)="navigate('/register')">Sign Up</button>
+      </div>
+
+      <mat-error *ngIf="errorMessage" class="form-error">
+        {{ errorMessage }}
+      </mat-error>
+    </form>
+  </mat-card>
 </div>

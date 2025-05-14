@@ -1,0 +1,41 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+mat-card {
+  width: 100%;
+  max-width: 900px;
+  padding: 16px;
+  background-color: #ffffff;
+}
+
+mat-card-title {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+mat-table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+mat-header-cell, mat-cell {
+  padding: 12px;
+}
+
+mat-header-cell {
+  background-color: #e0e0e0;
+  font-weight: 600;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}

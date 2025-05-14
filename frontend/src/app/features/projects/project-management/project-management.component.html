@@ -1,10 +1,11 @@
 <div class="table-container" *ngIf="projects && projects.length; else noProjectsTemplate">
   <mat-card>
-    <mat-card-title>Projects</mat-card-title>
-
-    <div class="buttons">
-      <button mat-raised-button color="primary" (click)="navigate('/project-form')">Create project</button>
-    </div>
+    <mat-card-header>
+        <mat-card-title>Projects</mat-card-title>
+        <button mat-icon-button matTooltip="Create project" aria-label="Create project" (click)="navigate('/project-form')">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-card-header>
 
     <mat-table [dataSource]="projects" class="mat-elevation-z2">
       <ng-container matColumnDef="name">
@@ -19,7 +20,19 @@
 
       <ng-container matColumnDef="createdBy">
         <mat-header-cell *matHeaderCellDef> Created By </mat-header-cell>
-        <mat-cell *matCellDef="let project"> {{ project.createdBy }} </mat-cell>
+        <mat-cell *matCellDef="let project"> {{ project.createdBy.email }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let project">
+          <button mat-icon-button color="accent" (click)="viewProject(project._id)" aria-label="View project">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="editProject(project._id)" aria-label="Edit project">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -1,37 +1,28 @@
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 16px;
+mat-card.login-card {
+  width: 100%;
+  max-width: 700px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 400px;
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 32px;
-  gap: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  gap: 1.5rem;
 }
 
-mat-form-field {
-  width: 100%;
+input[matInput] {
+  color: #212121;
 }
 
 .buttons {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 1rem;
 
   button {
     flex: 1;
   }
-}
-
-mat-error {
-  color: #d32f2f;
-  font-size: 0.85rem;
 }
