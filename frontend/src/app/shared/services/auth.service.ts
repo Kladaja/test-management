@@ -27,7 +27,7 @@ export class AuthService {
       'Content-Type': 'application/x-www-form-urlencoded'
     });
 
-    return this.http.post('http://localhost:5000/app/login', body, { headers: headers, withCredentials: true }).pipe(
+    return this.http.post('http://localhost:5000/app/auth/login', body, { headers: headers, withCredentials: true }).pipe(
       tap(() => this.loggedIn.next(true))
     );
   }
@@ -44,17 +44,17 @@ export class AuthService {
       'Content-Type': 'application/x-www-form-urlencoded'
     });
 
-    return this.http.post('http://localhost:5000/app/register', body, { headers: headers });
+    return this.http.post('http://localhost:5000/app/auth/register', body, { headers: headers });
   }
 
   logout() {
-    return this.http.post('http://localhost:5000/app/logout', {}, { withCredentials: true, responseType: 'text' }).pipe(
+    return this.http.post('http://localhost:5000/app/auth/logout', {}, { withCredentials: true, responseType: 'text' }).pipe(
       tap(() => this.loggedIn.next(false))
     );
   }
 
   checkAuth() {
-    return this.http.get<boolean>('http://localhost:5000/app/checkAuth', { withCredentials: true });
+    return this.http.get<boolean>('http://localhost:5000/app/auth/checkAuth', { withCredentials: true });
   }
 
   isLoggedIn(): boolean {

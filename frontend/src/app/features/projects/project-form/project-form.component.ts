@@ -53,7 +53,7 @@ export class ProjectFormComponent implements OnInit {
   onSubmit() {
     if (this.projectForm.valid) {
       if (!this.isEditMode) {
-        this.projectService.createProject(this.projectForm.value).subscribe({
+        this.projectService.addProject(this.projectForm.value).subscribe({
           next: () => this.router.navigate(['/project-management']),
           error: (err) => console.log(err)
         });

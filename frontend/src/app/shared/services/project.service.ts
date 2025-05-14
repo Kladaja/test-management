@@ -12,10 +12,14 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Project[]> {
-    return this.http.get<Project[]>('http://localhost:5000/app/getAllProjects', { withCredentials: true });
+    return this.http.get<Project[]>('http://localhost:5000/app/projects/getAllProjects', { withCredentials: true });
   }
 
-  createProject(project: Project): Observable<any> {
+  getProjectById(id: string): Observable<any> {
+    return this.http.get<Project>(`http://localhost:5000/app/projects/getProjectById/${id}`, { withCredentials: true });
+  }
+
+  addProject(project: Project): Observable<any> {
     const body = new URLSearchParams();
     body.set('name', project.name);
     body.set('description', project.description || '');
@@ -24,7 +28,7 @@ export class ProjectService {
       'Content-Type': 'application/x-www-form-urlencoded'
     });
 
-    return this.http.post('http://localhost:5000/app/addProject', body, { headers: headers, withCredentials: true });
+    return this.http.post('http://localhost:5000/app/projects/addProject', body, { headers: headers, withCredentials: true });
   }
 
   updateProject(id: string, project: Project): Observable<any> {
@@ -36,11 +40,10 @@ export class ProjectService {
       'Content-Type': 'application/x-www-form-urlencoded'
     });
 
-    return this.http.put(`http://localhost:5000/app/updateProject/${id}`, body.toString(), { headers, withCredentials: true });
+    return this.http.put(`http://localhost:5000/app/projects/updateProject/${id}`, body.toString(), { headers, withCredentials: true });
   }
 
-  getProjectById(id: string): Observable<any> {
-    return this.http.get<Project>(`http://localhost:5000/app/getProjectById/${id}`, { withCredentials: true });
+  deleteProject(id: string): Observable<any> {
+    return this.http.delete(`http://localhost:5000/app/projects/deleteProject/${id}`, { withCredentials: true });
   }
-
 }

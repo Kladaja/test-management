@@ -1,6 +1,9 @@
+import { Project } from "./Project";
+import { User } from "./User";
+
 export interface Requirement {
-    title: string;
-    description?: string;
-    project: string;
-    createdBy: string;
+    _id: string;
+    description: string;
+    project: Project;
+    createdBy: User;
 }

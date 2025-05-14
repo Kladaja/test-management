@@ -3,14 +3,87 @@
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{ project.name }}</mat-card-title>
-        <button mat-icon-button matTooltip="Edit project" aria-label="Edit project" (click)="editProject(project._id)">
+        <button mat-icon-button matTooltip="Edit project" aria-label="Edit project" (click)="updateProject(project._id)">
           <mat-icon>edit</mat-icon>
         </button>
       </mat-card-header>
-      
+
       <mat-card-content>
         <p><strong>Description:</strong> {{ project.description }}</p>
         <p><strong>Created by:</strong> {{ project.createdBy.email }}</p>
+
+        <div class="requirements-section">
+          <h3>Requirements</h3>
+          <p class="info-text">
+            Add functional or non-functional requirements for the project. Each requirement should describe an expected behavior or constraint.
+          </p>
+
+          <div class="buttons">
+            <mat-form-field appearance="outline" style="width: 50%">
+              <mat-label>Description</mat-label>
+              <input matInput [(ngModel)]="newRequirement.description" />
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="addRequirement()" [disabled]="!newRequirement.description.trim()">
+              <mat-icon>add</mat-icon>
+              Add Requirement
+            </button>
+          </div>
+
+          <ng-container *ngIf="requirements.length > 0; else noRequirements">
+            <table mat-table [dataSource]="requirements" class="mat-elevation-z8">
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let req">
+                  <ng-container *ngIf="editingRequirementId === req._id; else viewDesc">
+                    <input matInput [(ngModel)]="editedDescription" />
+                  </ng-container>
+                  <ng-template #viewDesc>
+                    {{ req.description || '-' }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="createdBy">
+                <th mat-header-cell *matHeaderCellDef> Created By </th>
+                <td mat-cell *matCellDef="let req"> {{req.createdBy.email}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let req">
+                  <ng-container *ngIf="editingRequirementId === req._id; else actionButtons">
+                    <button mat-icon-button color="primary" (click)="updateRequirement(req)" matTooltip="Save">
+                      <mat-icon>check</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="cancelEdit()" matTooltip="Cancel">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </ng-container>
+
+                  <ng-template #actionButtons>
+                    <button mat-icon-button color="primary" matTooltip="View" (click)="viewRequirement(req)">
+                      <mat-icon>visibility</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" matTooltip="Edit" (click)="editRequirement(req)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" matTooltip="Delete" (click)="deleteRequirement(req)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </ng-template>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="['description', 'createdBy', 'actions']"></tr>
+              <tr mat-row *matRowDef="let row; columns: ['description', 'createdBy', 'actions'];"></tr>
+            </table>
+          </ng-container>
+
+          <ng-template #noRequirements>
+            <p class="no-data-message">No requirements have been added yet.</p>
+          </ng-template>
+        </div>
       </mat-card-content>
     </mat-card>
   </ng-container>

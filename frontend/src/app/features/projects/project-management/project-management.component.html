@@ -26,11 +26,14 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
         <mat-cell *matCellDef="let project">
-          <button mat-icon-button color="accent" (click)="viewProject(project._id)" aria-label="View project">
+          <button mat-icon-button matTooltip="View project" aria-label="View project" (click)="viewProject(project._id)">
             <mat-icon>visibility</mat-icon>
           </button>
-          <button mat-icon-button color="primary" (click)="editProject(project._id)" aria-label="Edit project">
+          <button mat-icon-button matTooltip="Edit project" aria-label="Edit project" (click)="updateProject(project._id)">
             <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Delete project" aria-label="Delete project" (click)="deleteProject(project._id)">
+            <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
@@ -42,9 +45,11 @@
 </div>
 
 <ng-template #noProjectsTemplate>
-  <mat-card>
+  <mat-card class="empty-state">
     <mat-card-content>
-      <p>No projects found.</p>
+      <mat-icon class="empty-icon">folder_off</mat-icon>
+      <h2>No projects found</h2>
+      <p>You haven’t created or been assigned to any projects yet.</p>
     </mat-card-content>
   </mat-card>
 </ng-template>

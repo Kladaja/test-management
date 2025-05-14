@@ -1,6 +1,8 @@
 <div class="table-container" *ngIf="users && users.length; else noUsersTemplate">
   <mat-card>
-    <mat-card-title>Registered Users</mat-card-title>
+    <mat-card-header>
+      <mat-card-title>Registered Users</mat-card-title>
+    </mat-card-header>
     <mat-table [dataSource]="users" class="mat-elevation-z2">
 
       <ng-container matColumnDef="email">
@@ -37,9 +39,11 @@
 </div>
 
 <ng-template #noUsersTemplate>
-  <mat-card>
+  <mat-card class="empty-state">
     <mat-card-content>
-      <p>No users available.</p>
+      <mat-icon class="empty-icon">group_off</mat-icon>
+      <h2>No users found</h2>
+      <p>There are currently no registered users in the system.</p>
     </mat-card-content>
   </mat-card>
 </ng-template>

@@ -5,7 +5,7 @@ import expressSession from 'express-session';
 import passport from 'passport';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import { configureRoutes } from './routes/routes';
+import { configureRoutes } from './routes';
 import { configurePassport } from './passport/passport';
 
 const app = express();

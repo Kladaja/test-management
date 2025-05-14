@@ -12,5 +12,6 @@ export const routes: Routes = [
     { path: 'project-form', loadComponent: () => import('./features/projects/project-form/project-form.component').then((c) => c.ProjectFormComponent), canActivate: [authGuard] },
     { path: 'project-form/:id', loadComponent: () => import('./features/projects/project-form/project-form.component').then((c) => c.ProjectFormComponent), canActivate: [authGuard] },
     { path: 'project-details/:id', loadComponent: () => import('./features/projects/project-details/project-details.component').then((c) => c.ProjectDetailsComponent), canActivate: [authGuard] },
+    { path: 'requirement-details/:id', loadComponent: () => import('./features/requirements/requirement-details/requirement-details.component').then((c) => c.RequirementDetailsComponent), canActivate: [authGuard] },
     { path: '**', redirectTo: 'login' },
 ];

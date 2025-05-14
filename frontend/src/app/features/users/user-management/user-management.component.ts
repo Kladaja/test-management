@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { User } from '../../../shared/model/User';
 import { UserService } from '../../../shared/services/user.service';
 import { AuthService } from '../../../shared/services/auth.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-management',
@@ -14,7 +15,8 @@ import { AuthService } from '../../../shared/services/auth.service';
   imports: [
     CommonModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ],
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.scss'

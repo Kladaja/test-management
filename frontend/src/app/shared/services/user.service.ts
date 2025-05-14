@@ -10,10 +10,10 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<User[]>('http://localhost:5000/app/getAllUsers', { withCredentials: true });
+    return this.http.get<User[]>('http://localhost:5000/app/users/getAllUsers', { withCredentials: true });
   }
 
   getCurrentUser() {
-    return this.http.get<User>('http://localhost:5000/app/getCurrentUser', { withCredentials: true });
+    return this.http.get<User>('http://localhost:5000/app/users/getCurrentUser', { withCredentials: true });
   }
 }

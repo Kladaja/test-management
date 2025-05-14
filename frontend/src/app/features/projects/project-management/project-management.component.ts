@@ -4,7 +4,8 @@ import { Router, RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { Project } from '../../../shared/model/Project';
 import { ProjectService } from '../../../shared/services/project.service';
@@ -18,7 +19,8 @@ import { ProjectService } from '../../../shared/services/project.service';
     MatTableModule,
     MatCardModule,
     MatButtonModule,
-    MatIcon
+    MatIconModule,
+    MatTooltipModule
   ],
   templateUrl: './project-management.component.html',
   styleUrl: './project-management.component.scss'
@@ -44,8 +46,19 @@ export class ProjectManagementComponent {
     this.router.navigate(['/project-details', projectId]);
   }
 
-  editProject(projectId: string) {
+  updateProject(projectId: string) {
     this.router.navigate(['/project-form', projectId]);
+  }
+
+  deleteProject(projectId: string) {
+    if (confirm('Are you sure you want to delete this project?')) {
+      this.projectService.deleteProject(projectId).subscribe({
+        next: () => {
+          this.projects = this.projects?.filter(r => r._id !== projectId);
+        },
+        error: (err) => console.error('Error deleting requirement', err)
+      });
+    }
   }
 
   navigate(to: string) {

@@ -1,8 +1,18 @@
-<nav class="nav-container">
-    <ul>
-      <li><button (click)="navigate('/user-management')">Users</button></li>
-      <li><button (click)="navigate('/project-management')">Projects</button></li>
-      <li><button (click)="navigate('/user-profile')">Profile</button></li>
-      <li><button (click)="logout()">Logout</button></li>
-    </ul>
-</nav>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+
+<mat-toolbar color="primary" class="nav-container">
+  <span class="logo">Test<span class="logo-highlight">MS</span></span>
+
+  <span class="spacer"></span>
+
+  <button class="nav-button" (click)="navigate('/user-management')">Users</button>
+  <button class="nav-button" (click)="navigate('/project-management')">Projects</button>
+
+  <button class="nav-icon-button" matTooltip="Profile" aria-label="Profile" (click)="navigate('/user-profile')">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <button class="nav-icon-button" matTooltip="Logout" aria-label="Logout" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
