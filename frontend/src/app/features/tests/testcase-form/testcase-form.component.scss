@@ -4,7 +4,7 @@
   gap: 1.5rem;
 }
 
-.project-form {
+.testcase-form {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -34,4 +34,23 @@
   border-color: #ff0000 !important;
   border-width: 3px !important;
   background-color: #ffdddd;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.step-cell {
+  .mat-mdc-form-field {
+    padding-top: 10px;
+    color: black;
+  }
+}
+
+.step-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #dbdbdb;
+  padding: 10px;
 }

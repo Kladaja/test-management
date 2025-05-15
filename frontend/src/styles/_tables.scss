@@ -1,0 +1,23 @@
+// Styles for tables, including header cells, rows, hover effects, and table messages.
+// Use this file to define consistent table layouts and visual feedback for data tables.
+
+mat-table {
+  border-radius: ppx !important;
+}
+
+.mat-mdc-table {
+  margin-top: 15px;
+}
+
+.mat-mdc-header-cell {
+  background-color: #383838 !important;
+}
+
+.mat-mdc-row {
+  background-color: #dbdbdb !important;
+  color: #2b2b2b !important;
+}
+
+.mat-mdc-row:hover {
+  background-color: #cccccc !important;
+}

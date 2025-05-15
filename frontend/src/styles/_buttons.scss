@@ -1,0 +1,37 @@
+// Styles for all types of buttons, including primary, default, and icon buttons.
+// Use this file to define consistent button appearances and hover effects.
+
+.mat-mdc-raised-button.mat-primary {
+  background-color: #0d47a1 !important;
+  color: #ffffff !important;
+  border: 2px solid #0d47a1 !important;
+}
+
+.mat-mdc-raised-button.mat-primary:hover {
+  background-color: #1565c0 !important;
+  border-color: #1565c0 !important;
+}
+
+.mat-mdc-raised-button.mat-secondary {
+  background-color: #e0e0e0 !important;
+  color: #7c7c7c !important;
+  border: 2px solid #868686 !important;
+}
+
+.mat-mdc-raised-button.mat-secondary:hover {
+  background-color: #dadada !important;
+  border-color: #dadada !important;
+}
+
+.mat-mdc-button {
+  background-color: #ffffff !important;
+  color: #0d47a1 !important;
+  border: 2px solid #0d47a1 !important;
+  border-radius: 6px;
+}
+
+.mat-mdc-button:hover {
+  background-color: #e3f2fd !important;
+  border-color: #1565c0 !important;
+  color: #0d47a1 !important;
+}

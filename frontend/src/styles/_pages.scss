@@ -1,0 +1,35 @@
+// Page-specific containers and layout styling for tables, forms, and custom sections.
+// Use this file for section wrappers like .testcase-section, .requirements-section, and page-specific containers.
+
+.page-container, .form-container, .table-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+  min-width: 900px;
+}
+
+.testcase-section, .requirements-section {
+  margin-top: 2rem;
+
+  .info-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .mat-icon-button {
+    margin: 0 4px;
+  }
+}

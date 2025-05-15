@@ -21,8 +21,8 @@ export class RequirementService {
 
   addRequirement(projectId: string, description: string): Observable<Requirement> {
     const body = new URLSearchParams();
-    body.set('projectId', projectId);
     body.set('description', description || '');
+    body.set('projectId', projectId);
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'

@@ -15,7 +15,7 @@ export const projectRoutes = (): Router => {
     });
 
     router.get('/getProjectById/:id', async (req: Request, res: Response) => {
-        if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         try {
             const project = await Project.findById(req.params.id).populate('createdBy', 'email').exec();
             if (!project) res.status(404).send('Project not found.');

@@ -1,0 +1,16 @@
+// Styles for form elements such as inputs, labels, selects, and error messages.
+// Use this file to style Material form fields and validation messages consistently.
+
+mat-label, mat-select {
+  color: #1565c0;
+}
+
+.mdc-text-field__input, .mat-mdc-select {
+  color: #212121 !important;
+}
+
+mat-error {
+  margin-top: 0.5rem !important;
+  font-size: 0.875rem !important;
+  color: #d32f2f !important;
+}

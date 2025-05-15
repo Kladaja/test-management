@@ -39,7 +39,12 @@ export class ProjectDetailsComponent implements OnInit {
   editingRequirementId: string | null = null;
   editedDescription: string = '';
 
-  constructor(private route: ActivatedRoute, private projectService: ProjectService, private requirementService: RequirementService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private projectService: ProjectService,
+    private requirementService: RequirementService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');

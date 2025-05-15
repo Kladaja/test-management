@@ -1,0 +1,43 @@
+// Styles related to special application states like empty content views.
+// Use this file for empty states, placeholders, and state-specific visual cues (e.g., .empty-state).
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 2rem;
+  background-color: #f5f5f5;
+  border: 1px dashed #ccc;
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .empty-icon {
+    font-size: 48px;
+    color: #9e9e9e;
+    width: 50px;
+    height: 50px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #616161;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #757575;
+    margin: 0;
+  }
+}
+
+.no-data-message {
+  margin-top: 30px;
+  font-style: italic;
+  text-align: center;
+}

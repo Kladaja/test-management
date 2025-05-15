@@ -1,0 +1,22 @@
+// Layout-specific styles for different application states like logged-in and logged-out pages.
+// Use this file for flexbox layouts, padding, and centering rules related to overall app structure.
+
+.logged-in main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.logged-out {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  main {
+    width: 100%;
+    max-width: 500px;
+  }
+}

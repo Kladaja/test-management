@@ -1,0 +1,50 @@
+// General styles for Angular Material components and custom reusable UI elements.
+// Use this file to override or customize Material components like mat-card, mat-button, tooltips, etc.
+
+mat-card {
+  padding: 2rem 1rem !important;
+}
+
+mat-card-title {
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+  font-size: 1.75rem !important;
+  font-weight: 600 !important;
+  color: #0d47a1 !important;
+}
+
+mat-card-header {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+
+mat-card-header button {
+  margin: 0;
+  padding: 0;
+}
+
+.mat-mdc-tooltip-surface {
+  background-color: #0d47a1 !important;
+  color: #ffffff !important;
+  font-size: 1rem;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  max-width: 220px !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+}
+
+.mat-mdc-icon-button {
+  margin-top: -5px;
+  margin-left: 10px;
+  background-color: #dbdbdb !important;
+  color: #0d47a1 !important;
+  border-radius: 6px;
+}
+
+.mat-mdc-icon-button:hover {
+  background-color: #d3d3d3 !important;
+  color: #0d47a1 !important;
+}

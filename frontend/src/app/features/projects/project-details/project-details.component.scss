@@ -26,28 +26,3 @@ mat-header-cell {
   background-color: #e0e0e0;
   font-weight: 600;
 }
-
-.requirements-section {
-  margin-top: 2rem;
-
-  .info-text {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 1rem;
-  }
-
-  .buttons {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  table {
-    width: 100%;
-  }
-
-  .mat-icon-button {
-    margin: 0 4px;
-  }
-}
