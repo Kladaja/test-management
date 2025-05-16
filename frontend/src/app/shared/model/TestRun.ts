@@ -1,13 +1,17 @@
-export interface ITestRunResult {
-    testCase: string;
-    status: 'PASS' | 'FAIL' | 'NOT_RUN';
+import { Testcase } from "./Testcase";
+import { Testcycle } from "./TestCycle";
+import { User } from "./User";
+
+export interface ITestrunResult {
+    testcase: Testcase;
+    status: 'not run' | 'passed' | 'skipped' | 'blocked' | 'failed';
     notes?: string;
 }
 
-export interface TestRun {
+export interface Testrun {
     name: string;
-    suite: string;
-    executedBy: string;
-    results: ITestRunResult[];
+    cycle: Testcycle;
+    executedBy: User;
+    results: ITestrunResult[];
     executedAt: Date;
 }

@@ -23,7 +23,7 @@
 
           </div>
           
-          <ng-container *ngIf="testcases.length > 0; else noTestCases">
+          <ng-container *ngIf="testcases.length > 0; else noTestcases">
             <table mat-table [dataSource]="testcases" class="mat-elevation-z8" style="width: 100%;">
               <ng-container matColumnDef="title">
                 <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
@@ -60,7 +60,7 @@
             </table>
           </ng-container>
 
-          <ng-template #noTestCases>
+          <ng-template #noTestcases>
             <p class="no-data-message">No test cases have been added for this requirement yet.</p>
           </ng-template>
         </div>

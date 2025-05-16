@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { TestCase } from "../model/TestCase";
+import { Testcase } from "../model/Testcase";
 
 export const testcaseRoutes = (): Router => {
     const router = Router();
@@ -7,9 +7,9 @@ export const testcaseRoutes = (): Router => {
     router.get('/getTestcasesByRequirement/:requirementId', async (req: Request, res: Response) => {
         if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         try {
-            const testCases = await TestCase.find({ requirement: req.params.requirementId });
-            if (!testCases) res.status(404).send('Project not found.');
-            res.status(200).json(testCases);
+            const testcases = await Testcase.find({ requirement: req.params.requirementId });
+            if (!testcases) res.status(404).send('Project not found.');
+            res.status(200).json(testcases);
         } catch {
             res.status(500).send('Error fetching test cases.');
         }
@@ -19,7 +19,7 @@ export const testcaseRoutes = (): Router => {
         if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
         try {
             const { title, description, steps, expectedResult, requirementId, projectId } = req.body;
-            const testCase = new TestCase({
+            const testcase = new Testcase({
                 title,
                 description,
                 steps,
@@ -28,7 +28,7 @@ export const testcaseRoutes = (): Router => {
                 project: projectId,
                 createdBy: (req.user as any)._id
             });
-            const data = await testCase.save();
+            const data = await testcase.save();
             res.status(200).json(data);
         } catch (err) {
             console.error(err);

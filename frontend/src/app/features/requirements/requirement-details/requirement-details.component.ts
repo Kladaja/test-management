@@ -10,7 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { TestcaseService } from '../../../shared/services/testcase.service';
 import { Requirement } from '../../../shared/model/Requirement';
-import { Testcase } from '../../../shared/model/TestCase';
+import { Testcase } from '../../../shared/model/Testcase';
 
 @Component({
   selector: 'app-requirement-details',
@@ -44,14 +44,14 @@ export class RequirementDetailsComponent implements OnInit {
       this.requirementService.getRequirementById(id).subscribe({
         next: (req) => {
           this.requirement = req;
-          this.loadTestCases(id);
+          this.loadTestcases(id);
         },
         error: (err) => console.error('Error fetching requirement', err)
       });
     }
   }
 
-  loadTestCases(requirementId: string) {
+  loadTestcases(requirementId: string) {
     this.testcaseService.getTestcasesByRequirement(requirementId).subscribe({
       next: (cases) => this.testcases = cases,
       error: (err) => console.error('Error loading test cases', err)

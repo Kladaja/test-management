@@ -8,6 +8,7 @@ export interface Testcase {
     description?: string;
     steps: string[];
     expectedResult: string;
+    status: 'not run' | 'passed' | 'skipped' | 'blocked' | 'failed';
     requirement: Requirement;
     project: Project;
     createdBy: User;

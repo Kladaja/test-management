@@ -1,29 +1,29 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
 
-export interface ITestRunResult {
-    testCase: mongoose.Types.ObjectId;
-    status: 'PASS' | 'FAIL' | 'NOT_RUN';
+export interface ITestrunResult {
+    testcase: mongoose.Types.ObjectId;
+    status: 'not run' | 'passed' | 'skipped' | 'blocked' | 'failed';
     notes?: string;
 }
 
-export interface ITestRun extends Document {
+export interface ITestrun extends Document {
     name: string;
-    suite: mongoose.Types.ObjectId;
+    cycle: mongoose.Types.ObjectId;
     executedBy: mongoose.Types.ObjectId;
-    results: ITestRunResult[];
+    results: ITestrunResult[];
     executedAt: Date;
 }
 
-const TestRunSchema = new Schema<ITestRun>({
+const TestrunSchema = new Schema<ITestrun>({
     name: { type: String, required: true },
-    suite: { type: mongoose.Schema.Types.ObjectId, ref: 'TestSuite', required: true },
+    cycle: { type: mongoose.Schema.Types.ObjectId, ref: 'Testcycle', required: true },
     executedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     results: [{
-        testCase: { type: mongoose.Schema.Types.ObjectId, ref: 'TestCase', required: true },
-        status: { type: String, enum: ['PASS', 'FAIL', 'NOT_RUN'], required: true },
+        testcase: { type: mongoose.Schema.Types.ObjectId, ref: 'Testcase', required: true },
+        status: { type: String, enum: ['not run', 'passed', 'skipped', 'blocked', 'failed'], required: true },
         notes: String
     }],
     executedAt: { type: Date, default: Date.now }
 }, { timestamps: true });
 
-export const TestRun: Model<ITestRun> = mongoose.model<ITestRun>('TestRun', TestRunSchema);
+export const Testrun: Model<ITestrun> = mongoose.model<ITestrun>('Testrun', TestrunSchema);
