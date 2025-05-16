@@ -1,0 +1,13 @@
+mat-table {
+  width: 100%;
+  overflow: hidden;
+}
+
+mat-header-cell, mat-cell {
+  padding: 12px;
+}
+
+mat-header-cell {
+  background-color: #e0e0e0;
+  font-weight: 600;
+}

@@ -55,6 +55,7 @@ export class TestcaseFormComponent implements OnInit {
         description: [''],
         expectedResult: ['', Validators.required],
         steps: this.fb.array([]),
+        status: 'not run',
         requirement: [this.requirementId, Validators.required],
         project: [this.projectId, Validators.required]
       });
@@ -102,7 +103,7 @@ export class TestcaseFormComponent implements OnInit {
       // TODO: Implement update in the service
     } else {
       this.testcaseService.addTestcase(formValue, this.requirementId, this.projectId).subscribe({
-        next: () => this.router.navigate(['/requirements', this.requirementId]),
+        next: () => this.router.navigate(['/requirement-details', this.requirementId]),
         error: err => console.error(err)
       });
     }

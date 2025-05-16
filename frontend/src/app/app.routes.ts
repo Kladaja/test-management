@@ -15,6 +15,6 @@ export const routes: Routes = [
     { path: 'requirement-details/:id', loadComponent: () => import('./features/requirements/requirement-details/requirement-details.component').then((c) => c.RequirementDetailsComponent), canActivate: [authGuard] },
     { path: 'testcase-form', loadComponent: () => import('./features/tests/testcase-form/testcase-form.component').then((c) => c.TestcaseFormComponent), canActivate: [authGuard] },
     { path: 'testcase-form/:id', loadComponent: () => import('./features/tests/testcase-form/testcase-form.component').then((c) => c.TestcaseFormComponent), canActivate: [authGuard] },
-    { path: 'testcase-details', loadComponent: () => import('./features/tests/testcase-details/testcase-details.component').then((c) => c.TestcaseDetailsComponent), canActivate: [authGuard] },
+    { path: 'testcase-details/:id', loadComponent: () => import('./features/tests/testcase-details/testcase-details.component').then((c) => c.TestcaseDetailsComponent), canActivate: [authGuard] },
     { path: '**', redirectTo: 'login' },
 ];

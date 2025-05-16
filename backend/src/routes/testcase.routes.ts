@@ -9,21 +9,29 @@ export const testcaseRoutes = (): Router => {
         try {
             const testcases = await Testcase.find({ requirement: req.params.requirementId });
             if (!testcases) res.status(404).send('Project not found.');
-            res.status(200).json(testcases);
-        } catch {
-            res.status(500).send('Error fetching test cases.');
-        }
+            else res.status(200).json(testcases);
+        } catch { res.status(500).send('Error fetching test cases.'); }
+    });
+
+    router.get('/getTestcaseById/:id', async (req: Request, res: Response) => {
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
+        try {
+            const testcase = await Testcase.findById(req.params.id);
+            if (!testcase) res.status(404).json({ message: 'Requirement not found' });
+            res.json(testcase);
+        } catch (err) { res.status(500).json(err); }
     });
 
     router.post('/addTestcase', async (req: Request, res: Response) => {
-        if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         try {
-            const { title, description, steps, expectedResult, requirementId, projectId } = req.body;
+            const { title, description, steps, expectedResult, status, requirementId, projectId } = req.body;
             const testcase = new Testcase({
                 title,
                 description,
                 steps,
                 expectedResult,
+                status,
                 requirement: requirementId,
                 project: projectId,
                 createdBy: (req.user as any)._id

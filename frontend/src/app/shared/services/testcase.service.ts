@@ -15,6 +15,9 @@ export class TestcaseService {
     return this.http.get<Testcase[]>(`http://localhost:5000/app/testcases/getTestcasesByRequirement/${requirementId}`, { withCredentials: true });
   }
 
+  getTestcaseById(id: string): Observable<Testcase> {
+    return this.http.get<Testcase>(`http://localhost:5000/app/testcases/getTestcaseById/${id}`, { withCredentials: true });
+  }
 
   addTestcase(testcase: Testcase, requirementId: string, projectId: string) {
     const body = new URLSearchParams();
@@ -22,6 +25,7 @@ export class TestcaseService {
     body.set('description', testcase.description || '');
     body.set('steps', JSON.stringify(testcase.steps));
     body.set('expectedResult', testcase.expectedResult || '');
+    body.set('status', testcase.status);
     body.set('requirementId', requirementId);
     body.set('projectId', projectId);
 

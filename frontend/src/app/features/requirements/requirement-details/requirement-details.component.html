@@ -12,7 +12,7 @@
         <div class="testcases-section">
           <h3>Test Cases</h3>
           <p class="info-text">
-            Below are the test cases linked to this requirement.
+            Below are the test cases linked to this requirement. These tests validate that the requirement is correctly implemented and meets the specified criteria.
           </p>
 
           <div class="buttons">
@@ -24,7 +24,7 @@
           </div>
           
           <ng-container *ngIf="testcases.length > 0; else noTestcases">
-            <table mat-table [dataSource]="testcases" class="mat-elevation-z8" style="width: 100%;">
+            <mat-table mat-table [dataSource]="testcases" class="mat-elevation-z8" style="width: 100%;">
               <ng-container matColumnDef="title">
                 <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
                 <mat-cell *matCellDef="let tc"> {{ tc.title }} </mat-cell>
@@ -57,7 +57,7 @@
 
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
               <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </table>
+            </mat-table>
           </ng-container>
 
           <ng-template #noTestcases>

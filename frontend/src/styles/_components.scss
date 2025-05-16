@@ -3,6 +3,10 @@
 
 mat-card {
   padding: 2rem 1rem !important;
+  width: 100% !important;
+  max-width: 900px !important;
+  padding: 16px !important;
+  background-color: #ffffff !important;
 }
 
 mat-card-title {

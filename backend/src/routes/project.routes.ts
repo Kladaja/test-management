@@ -5,7 +5,7 @@ export const projectRoutes = (): Router => {
     const router = Router();
 
     router.get('/getAllProjects', async (req: Request, res: Response) => {
-        if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         try {
             const projects = await Project.find().populate('createdBy', 'email').exec();
             res.status(200).json(projects);
@@ -26,7 +26,7 @@ export const projectRoutes = (): Router => {
     });
 
     router.post('/addProject', async (req: Request, res: Response) => {
-        if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         const { name, description } = req.body;
         try {
             const project = new Project({
@@ -43,7 +43,7 @@ export const projectRoutes = (): Router => {
     });
 
     router.put('/updateProject/:id', async (req: Request, res: Response) => {
-        if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         try {
             const updated = await Project.findByIdAndUpdate(
                 req.params.id,
@@ -57,7 +57,7 @@ export const projectRoutes = (): Router => {
     });
 
     router.delete('/deleteProject/:id', async (req: Request, res: Response) => {
-        if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
 
         try {
             const deleted = await Project.findByIdAndDelete(req.params.id);

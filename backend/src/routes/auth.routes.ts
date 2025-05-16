@@ -10,7 +10,7 @@ export const authRoutes = (passport: PassportStatic): Router => {
             if (error) return res.status(500).send(error);
             if (!user) return res.status(400).send('User not found.');
             req.login(user, (err) => {
-                if (err) return res.status(500).send('Internal server error.');
+                if (err) return res.status(500).send(err);
                 res.status(200).send(user);
             });
         })(req, res, next);
@@ -30,7 +30,7 @@ export const authRoutes = (passport: PassportStatic): Router => {
     router.post('/logout', (req, res) => {
         if (req.isAuthenticated()) {
             req.logout(err => {
-                if (err) return res.status(500).send('Internal server error.');
+                if (err) return res.status(500).send(err);
                 res.status(200).send('Successfully logged out.');
             });
         } else {

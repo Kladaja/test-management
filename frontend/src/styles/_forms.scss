@@ -9,6 +9,12 @@ mat-label, mat-select {
   color: #212121 !important;
 }
 
+mat-hint {
+  font-size: 14px;
+  color: #8b8b8b;
+  padding: 10px 0;
+}
+
 mat-error {
   margin-top: 0.5rem !important;
   font-size: 0.875rem !important;

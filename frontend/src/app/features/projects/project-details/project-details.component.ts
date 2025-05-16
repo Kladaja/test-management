@@ -98,11 +98,8 @@ export class ProjectDetailsComponent implements OnInit {
     const updatedDescription = this.editedDescription.trim();
 
     this.requirementService.updateRequirement(req._id, updatedDescription).subscribe({
-      next: (updatedReq) => {
-        const index = this.requirements.findIndex(r => r._id === req._id);
-        if (index !== -1) {
-          this.requirements[index] = updatedReq;
-        }
+      next: () => {
+        this.loadRequirements();
         this.editingRequirementId = null;
         this.editedDescription = '';
       },
@@ -119,7 +116,7 @@ export class ProjectDetailsComponent implements OnInit {
     if (confirm('Are you sure you want to delete this requirement?')) {
       this.requirementService.deleteRequirement(req._id).subscribe({
         next: () => {
-          this.requirements = this.requirements.filter(r => r._id !== req._id);
+          this.requirements = [...this.requirements.filter(r => r._id !== req._id)];
         },
         error: (err) => console.error('Error deleting requirement', err)
       });

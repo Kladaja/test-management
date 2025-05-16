@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RequirementService } from '../../../shared/services/requirement.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { RequirementService } from '../../../shared/services/requirement.service';
 import { TestcaseService } from '../../../shared/services/testcase.service';
 import { Requirement } from '../../../shared/model/Requirement';
 import { Testcase } from '../../../shared/model/Testcase';
@@ -69,8 +69,8 @@ export class RequirementDetailsComponent implements OnInit {
     });
   }
 
-  viewTestcase(tc: string): void {
-    this.router.navigate(['/testcase-details', tc]);
+  viewTestcase(tc: Testcase): void {
+    this.router.navigate(['/testcase-details', tc._id]);
   }
 
   updateTestcase(tc: string) {

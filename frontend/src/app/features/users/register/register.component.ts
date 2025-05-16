@@ -1,5 +1,6 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -30,8 +31,8 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
-    private location: Location,
     private authService: AuthService
   ) { }
 
@@ -69,9 +70,8 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe({
         next: (data) => {
-          console.log(data);
+          this.navigate('/login');
         }, error: (err) => {
-          console.log(this.registerForm.value);
           console.log(err);
         }
       });
@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  goBack() {
-    this.location.back();
+  navigate(to: string) {
+    this.router.navigateByUrl(to);
   }
 }

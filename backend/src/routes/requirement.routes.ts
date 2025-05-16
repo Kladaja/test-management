@@ -5,7 +5,7 @@ export const requirementRoutes = (): Router => {
     const router = Router();
 
     router.get('/getRequirementsByProject/:projectId', async (req: Request, res: Response) => {
-        if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         try {
             const requirements = await Requirement.find({ project: req.params.projectId })
                 .populate('createdBy', 'email')
@@ -17,24 +17,17 @@ export const requirementRoutes = (): Router => {
     });
 
     router.get('/getRequirementById/:id', async (req: Request, res: Response) => {
-        if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         try {
             const requirement = await Requirement.findById(req.params.id).populate('createdBy', 'email');
-
-            if (!requirement) {
-                res.status(404).json({ message: 'Requirement not found' });
-            }
-
+            if (!requirement) res.status(404).json({ message: 'Requirement not found' });
             res.json(requirement);
-        } catch (err) {
-            console.error('Error fetching requirement by ID:', err);
-            res.status(500).json({ message: 'Server error' });
-        }
+        } catch (err) { res.status(500).json({ message: 'Server error' }); }
     });
 
 
     router.post('/addRequirement', async (req: Request, res: Response) => {
-        if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         const { description, projectId } = req.body;
         try {
             const requirement = new Requirement({
@@ -50,7 +43,7 @@ export const requirementRoutes = (): Router => {
     });
 
     router.put('/updateRequirement/:id', async (req: Request, res: Response) => {
-        if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
 
         const { description } = req.body;
         try {
@@ -67,7 +60,7 @@ export const requirementRoutes = (): Router => {
     });
 
     router.delete('/deleteRequirement/:id', async (req: Request, res: Response) => {
-        if (!req.isAuthenticated()) { res.status(401).send('Unauthorized'); }
+        if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
 
         try {
             const deleted = await Requirement.findByIdAndDelete(req.params.id);

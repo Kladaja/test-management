@@ -1,1 +1,53 @@
-<p>testcase-details works!</p>
+<div class="page-container">
+  <ng-container *ngIf="testcase; else loading">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Test Case Details</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>Title:</strong></p>
+        <p>{{ testcase.title }}</p>
+        <p><strong>Created By:</strong></p>
+        <p>{{ testcase.description }}</p>
+        <p><strong>Expected result:</strong></p>
+        <p>{{ testcase.expectedResult }}</p>
+        <p><strong>Status:</strong></p>
+        <p>{{ testcase.status }}</p>
+
+        <div class="testcases-section">
+            <h3>Test Steps</h3>
+            <p class="info-text">
+                This section outlines the detailed actions required to execute the test case. Follow each step carefully to ensure accurate and consistent testing results.
+            </p>
+          
+            <ng-container *ngIf="stepDataSource.length > 0; else noSteps">
+                <mat-table mat-table [dataSource]="stepDataSource" class="mat-elevation-z8" style="width: 100%;">
+                    <ng-container matColumnDef="index">
+                    <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+                    <mat-cell *matCellDef="let step; let i = index"> {{ i + 1 }} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="step">
+                    <mat-header-cell *matHeaderCellDef> Step Description </mat-header-cell>
+                    <mat-cell *matCellDef="let step"> {{ step.step }} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </ng-container>
+
+          <ng-template #noSteps>
+            <p class="no-data-message">No steps have been added for this test case yet.</p>
+          </ng-template>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+
+  <ng-template #loading>
+    <p>Loading test case...</p>
+  </ng-template>
+</div>
