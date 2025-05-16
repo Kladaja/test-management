@@ -1,0 +1,44 @@
+mat-table {
+  width: 100%;
+  overflow: hidden;
+}
+
+mat-header-cell, mat-cell {
+  padding: 12px;
+}
+
+mat-header-cell {
+  background-color: #e0e0e0;
+  font-weight: 600;
+}
+
+.removed {
+  background-color: #cfcfcf !important;
+
+  .mat-mdc-icon-button {
+    background-color: #cfcfcf !important;
+    margin-right: 10px;
+  }
+}
+
+.added {
+  .mat-mdc-icon-button {
+    margin-right: 10px;
+  }
+}
+
+.mat-mdc-icon-button {
+    margin-right: 10px;
+  }
+
+.remove-button {
+  color:#ce0000 !important;
+  background-color: #ffffff !important;
+  border-color: #ce0000 !important;
+}
+
+.add-button {
+  color:#07cc00 !important;
+  background-color: #ffffff !important;
+  border-color: #07cc00 !important;
+}

@@ -7,9 +7,7 @@ export const requirementRoutes = (): Router => {
     router.get('/getRequirementsByProject/:projectId', async (req: Request, res: Response) => {
         if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         try {
-            const requirements = await Requirement.find({ project: req.params.projectId })
-                .populate('createdBy', 'email')
-                .exec();
+            const requirements = await Requirement.find({ project: req.params.projectId }).populate('createdBy', 'email').exec();
             res.status(200).json(requirements);
         } catch {
             res.status(500).send('Error fetching requirements.');

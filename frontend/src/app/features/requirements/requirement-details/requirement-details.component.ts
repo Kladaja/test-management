@@ -74,19 +74,17 @@ export class RequirementDetailsComponent implements OnInit {
   }
 
   updateTestcase(tc: string) {
-    // this.router.navigate(['/project-form', tc]);
+    this.router.navigate(['/testcase-form', tc]);
   }
 
-  deleteTestcase(tc: string): void {
+  deleteTestcase(tc: Testcase): void {
     if (confirm('Are you sure you want to delete this test case?')) {
-      /*
-      this.requirementService.deleteRequirement(req._id).subscribe({
+      this.testcaseService.deleteTestcase(tc._id).subscribe({
         next: () => {
-          this.requirements = this.requirements.filter(r => r._id !== req._id);
+          this.testcases = [...this.testcases.filter(t => t._id !== t._id)];
         },
-        error: (err) => console.error('Error deleting requirement', err)
+        error: (err) => console.error('Error deleting test case', err)
       });
-      */
     }
   }
 }

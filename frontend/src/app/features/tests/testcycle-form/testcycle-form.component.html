@@ -1,0 +1,47 @@
+<div class="form-container">
+  <form [formGroup]="testcycleForm" (ngSubmit)="onSubmit()" class="testcycle-form">
+    <mat-card>
+      <mat-card-title>{{ isEditMode ? 'Edit testcycle' : 'Create new testcycle' }}</mat-card-title>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Testcycle name</mat-label>
+        <input matInput formControlName="name" required />
+        <mat-hint>Enter a unique and descriptive name for your testcycle. This is a required field.</mat-hint>
+        <mat-error *ngIf="testcycleForm.get('name')?.hasError('required')">Name is required!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="4"></textarea>
+        <mat-hint>Provide a brief summary or details about the testcycle. This helps clarify the testcycle’s purpose and scope.</mat-hint>
+      </mat-form-field>
+
+      <ng-container *ngIf="!isEditMode; else readOnlyProject">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Project</mat-label>
+          <mat-select formControlName="projectId" required>
+            <mat-option *ngFor="let project of projects" [value]="project._id">
+              {{ project.name }}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Select the project this testcycle belongs to.</mat-hint>
+          <mat-error *ngIf="testcycleForm.get('projectId')?.hasError('required')">
+            Project is required!
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+
+      <ng-template #readOnlyProject>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Project</mat-label>
+          <input matInput [value]="selectedProjectName" disabled />
+          <mat-hint>Project cannot be changed for existing testcycles.</mat-hint>
+        </mat-form-field>
+      </ng-template>
+
+      <div class="buttons">
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </div>
+    </mat-card>
+  </form>
+</div>

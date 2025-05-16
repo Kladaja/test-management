@@ -1,5 +1,5 @@
 import { Testcase } from "./Testcase";
-import { Testcycle } from "./TestCycle";
+import { Testcycle } from "./Testcycle";
 import { User } from "./User";
 
 export interface ITestrunResult {
@@ -9,6 +9,7 @@ export interface ITestrunResult {
 }
 
 export interface Testrun {
+    _id: string;
     name: string;
     cycle: Testcycle;
     executedBy: User;

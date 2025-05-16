@@ -1,0 +1,64 @@
+<div class="page-container">
+  <ng-container *ngIf="testcycle; else loading">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Testcycle Details</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>Description:</strong> {{ testcycle.description }}</p>
+        <p><strong>Related Project:</strong> {{ testcycle.project.name }}</p>
+        <p><strong>Created By:</strong> {{ testcycle.createdBy.email }}</p>
+
+        <div class="testcases-section">
+          <h3>Test Cases</h3>
+          <p class="info-text">
+            Below are the test cases linked to this testcycle. These tests validate that the testcycle is correctly implemented and meets the specified criteria.
+          </p>
+          
+          <ng-container *ngIf="allProjectTestcases.length > 0; else noTestcases">
+            <mat-table [dataSource]="allProjectTestcases" class="mat-elevation-z4" style="width: 100%;">
+            <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+                <mat-cell *matCellDef="let tc" [ngClass]="isLinkedToCycle(tc) ? 'removed' : 'added'"> {{ tc.title }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="expectedResult">
+                <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                <mat-cell *matCellDef="let tc" [ngClass]="isLinkedToCycle(tc) ? 'removed' : 'added'"> {{ tc.description }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                <mat-cell *matCellDef="let tc" [ngClass]="isLinkedToCycle(tc) ? 'removed' : 'added'"><i> {{ tc.status }} </i></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                <mat-cell *matCellDef="let tc" [ngClass]="isLinkedToCycle(tc) ? 'removed' : 'added'">
+                  <button mat-icon-button color="primary" matTooltip="View" (click)="viewTestcase(tc)">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                <button mat-button [ngClass]="isLinkedToCycle(tc) ? 'remove-button' : 'add-button'"  (click)="toggleTestcaseInCycle(tc)">
+                    {{ isLinkedToCycle(tc) ? 'Remove' : 'Add' }}
+                </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </ng-container>
+
+          <ng-template #noTestcases>
+            <p class="no-data-message">No test cases have been added for this testcycle yet.</p>
+          </ng-template>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+
+  <ng-template #loading>
+    <p>Loading testcycle...</p>
+  </ng-template>
+</div>

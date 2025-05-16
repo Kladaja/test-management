@@ -16,5 +16,12 @@ export const routes: Routes = [
     { path: 'testcase-form', loadComponent: () => import('./features/tests/testcase-form/testcase-form.component').then((c) => c.TestcaseFormComponent), canActivate: [authGuard] },
     { path: 'testcase-form/:id', loadComponent: () => import('./features/tests/testcase-form/testcase-form.component').then((c) => c.TestcaseFormComponent), canActivate: [authGuard] },
     { path: 'testcase-details/:id', loadComponent: () => import('./features/tests/testcase-details/testcase-details.component').then((c) => c.TestcaseDetailsComponent), canActivate: [authGuard] },
+    { path: 'testcycle-management', loadComponent: () => import('./features/tests/testcycle-management/testcycle-management.component').then((c) => c.TestcycleManagementComponent), canActivate: [authGuard] },
+    { path: 'testcycle-form', loadComponent: () => import('./features/tests/testcycle-form/testcycle-form.component').then((c) => c.TestcycleFormComponent), canActivate: [authGuard] },
+    { path: 'testcycle-form/:id', loadComponent: () => import('./features/tests/testcycle-form/testcycle-form.component').then((c) => c.TestcycleFormComponent), canActivate: [authGuard] },
+    { path: 'testcycle-details/:id', loadComponent: () => import('./features/tests/testcycle-details/testcycle-details.component').then((c) => c.TestcycleDetailsComponent), canActivate: [authGuard] },
+    { path: 'testrun-form', loadComponent: () => import('./features/tests/testrun-form/testrun-form.component').then((c) => c.TestrunFormComponent), canActivate: [authGuard] },
+    { path: 'testrun-form/:id', loadComponent: () => import('./features/tests/testrun-form/testrun-form.component').then((c) => c.TestrunFormComponent), canActivate: [authGuard] },
+    { path: 'testrun-details/:id', loadComponent: () => import('./features/tests/testrun-details/testrun-details.component').then((c) => c.TestrunDetailsComponent), canActivate: [authGuard] },
     { path: '**', redirectTo: 'login' },
 ];

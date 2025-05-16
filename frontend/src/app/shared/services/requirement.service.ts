@@ -23,7 +23,6 @@ export class RequirementService {
     const body = new URLSearchParams();
     body.set('description', description || '');
     body.set('projectId', projectId);
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'
     });

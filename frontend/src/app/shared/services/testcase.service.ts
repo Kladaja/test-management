@@ -15,6 +15,14 @@ export class TestcaseService {
     return this.http.get<Testcase[]>(`http://localhost:5000/app/testcases/getTestcasesByRequirement/${requirementId}`, { withCredentials: true });
   }
 
+  getTestcasesByProject(projectId: string): Observable<Testcase[]> {
+    return this.http.get<Testcase[]>(`http://localhost:5000/app/testcases/getTestcasesByProject/${projectId}`, { withCredentials: true });
+  }
+
+  getTestcasesByTestcycle(testcycleId: string): Observable<Testcase[]> {
+    return this.http.get<Testcase[]>(`http://localhost:5000/app/testcases/getTestcasesByTestcycle/${testcycleId}`, { withCredentials: true });
+  }
+
   getTestcaseById(id: string): Observable<Testcase> {
     return this.http.get<Testcase>(`http://localhost:5000/app/testcases/getTestcaseById/${id}`, { withCredentials: true });
   }
@@ -28,11 +36,19 @@ export class TestcaseService {
     body.set('status', testcase.status);
     body.set('requirementId', requirementId);
     body.set('projectId', projectId);
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    });
-
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     return this.http.post('http://localhost:5000/app/testcases/addTestcase', body, { headers: headers, withCredentials: true });
+  }
+
+  addTestcaseToTestcycle(testcaseId: string, testcycleId: string): Observable<Testcase> {
+    return this.http.post<Testcase>(`http://localhost:5000/app/testcases/${testcaseId}/addToTestcycle/${testcycleId}`, {}, { withCredentials: true });
+  }
+
+  deleteTestcase(id: string): Observable<any> {
+    return this.http.delete(`http://localhost:5000/app/testcases/deleteTestcase/${id}`, { withCredentials: true });
+  }
+
+  removeTestcaseFromTestcycle(testcaseId: string, testcycleId: string): Observable<Testcase> {
+    return this.http.post<Testcase>(`http://localhost:5000/app/testcases/${testcaseId}/removeFromTestcycle/${testcycleId}`, {}, { withCredentials: true });
   }
 }

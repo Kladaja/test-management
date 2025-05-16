@@ -46,6 +46,13 @@
 
 <ng-template #noProjectsTemplate>
   <mat-card class="empty-state">
+    <mat-card-header>
+        <mat-card-title>Projects</mat-card-title>
+        <button mat-icon-button matTooltip="Create project" aria-label="Create project" (click)="navigate('/project-form')">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-card-header>
+    
     <mat-card-content>
       <mat-icon class="empty-icon">folder_off</mat-icon>
       <h2>No projects found</h2>
