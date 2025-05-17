@@ -3,10 +3,10 @@
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{ project.name }}</mat-card-title>
-        <button mat-icon-button matTooltip="Edit project" aria-label="Edit project" (click)="updateProject(project._id)">
+        <button *ngIf="isManager" mat-icon-button matTooltip="Edit project" aria-label="Edit project" (click)="updateProject(project._id)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="Delete project" aria-label="Delete project" (click)="deleteProject(project._id)">
+        <button *ngIf="isManager" mat-icon-button matTooltip="Delete project" aria-label="Delete project" (click)="deleteProject(project._id)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-card-header>
@@ -17,11 +17,11 @@
 
         <div class="requirements-section">
           <h3>Requirements</h3>
-          <p class="info-text">
+          <p *ngIf="isManager" class="info-text">
             Add functional or non-functional requirements for the project. Each requirement should describe an expected behavior or constraint.
           </p>
 
-          <div class="buttons">
+          <div *ngIf="isManager" class="buttons">
             <mat-form-field appearance="outline" style="width: 50%">
               <mat-label>Description</mat-label>
               <input matInput [(ngModel)]="newRequirement.description" />
@@ -68,10 +68,10 @@
                     <button mat-icon-button color="primary" matTooltip="View" (click)="viewRequirement(req)">
                       <mat-icon>visibility</mat-icon>
                     </button>
-                    <button mat-icon-button color="accent" matTooltip="Edit" (click)="editRequirement(req)">
+                    <button *ngIf="isManager" mat-icon-button color="accent" matTooltip="Edit" (click)="editRequirement(req)">
                       <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" matTooltip="Delete" (click)="deleteRequirement(req)">
+                    <button *ngIf="isManager" mat-icon-button color="warn" matTooltip="Delete" (click)="deleteRequirement(req)">
                       <mat-icon>delete</mat-icon>
                     </button>
                   </ng-template>

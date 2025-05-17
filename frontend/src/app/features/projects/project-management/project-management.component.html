@@ -6,6 +6,7 @@
     <mat-card-header>
       <mat-card-title>Projects</mat-card-title>
       <button
+        *ngIf="isManager"
         mat-icon-button
         matTooltip="Create project"
         aria-label="Create project"
@@ -47,6 +48,7 @@
             <mat-icon>visibility</mat-icon>
           </button>
           <button
+            *ngIf="isManager"
             mat-icon-button
             matTooltip="Edit project"
             aria-label="Edit project"
@@ -55,6 +57,7 @@
             <mat-icon>edit</mat-icon>
           </button>
           <button
+            *ngIf="isManager"
             mat-icon-button
             matTooltip="Delete project"
             aria-label="Delete project"

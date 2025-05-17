@@ -9,6 +9,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { Project } from '../../../shared/model/Project';
 import { ProjectService } from '../../../shared/services/project.service';
+import { User } from '../../../shared/model/User';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-project-management',
@@ -26,12 +28,20 @@ import { ProjectService } from '../../../shared/services/project.service';
   styleUrl: './project-management.component.scss',
 })
 export class ProjectManagementComponent {
+  user: User | null = null;
   projects?: Project[];
   displayedColumns: string[] = ['name', 'description', 'createdBy', 'actions'];
 
-  constructor(private projectService: ProjectService, private router: Router) {}
+  constructor(
+    private projectService: ProjectService,
+    private userService: UserService,
+    private router: Router) { }
 
   ngOnInit() {
+    this.userService.getCurrentUser().subscribe({
+      next: (user) => this.user = user,
+      error: () => this.user = null
+    });
     this.projectService.getAll().subscribe({
       next: (data) => {
         this.projects = data;
@@ -40,6 +50,10 @@ export class ProjectManagementComponent {
         console.error(err);
       },
     });
+  }
+
+  get isManager(): boolean {
+    return this.user?.role === 'manager';
   }
 
   viewProject(projectId: string) {

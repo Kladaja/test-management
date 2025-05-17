@@ -14,6 +14,8 @@ import { ProjectService } from '../../../shared/services/project.service';
 import { Project } from '../../../shared/model/Project';
 import { RequirementService } from '../../../shared/services/requirement.service';
 import { Requirement } from '../../../shared/model/Requirement';
+import { User } from '../../../shared/model/User';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-project-details',
@@ -33,6 +35,7 @@ import { Requirement } from '../../../shared/model/Requirement';
   styleUrl: './project-details.component.scss'
 })
 export class ProjectDetailsComponent implements OnInit {
+  user: User | null = null;
   project: Project | null = null;
   requirements: Requirement[] = [];
   newRequirement = { description: '' };
@@ -43,10 +46,15 @@ export class ProjectDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private requirementService: RequirementService,
+    private userService: UserService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.userService.getCurrentUser().subscribe({
+      next: (user) => this.user = user,
+      error: () => this.user = null
+    });
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.projectService.getProjectById(id).subscribe({
@@ -57,6 +65,10 @@ export class ProjectDetailsComponent implements OnInit {
         error: (err) => console.error('Error fetching project', err)
       });
     }
+  }
+
+  get isManager(): boolean {
+    return this.user?.role === 'manager';
   }
 
   loadRequirements(): void {

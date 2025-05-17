@@ -5,15 +5,15 @@
 
   <span class="spacer"></span>
 
-  <button *ngIf="isManager" class="nav-button" (click)="navigate('/user-management')">Users</button>
-  <button *ngIf="isManager" class="nav-button" (click)="navigate('/project-management')">Projects</button>
-  <button class="nav-button" (click)="navigate('/testcycle-management')">Tests</button>
+  <span *ngIf="isManager" class="nav-button" (click)="navigate('/user-management')">Users</span>
+  <span class="nav-button" (click)="navigate('/project-management')">Projects</span>
+  <span class="nav-button" (click)="navigate('/testcycle-management')">Tests</span>
 
-  <button class="nav-icon-button" matTooltip="Profile" aria-label="Profile" (click)="navigate('/user-profile')">
+  <span class="nav-icon-button" matTooltip="Profile" aria-label="Profile" (click)="navigate('/user-profile')">
     <mat-icon>account_circle</mat-icon>
-  </button>
+  </span>
 
-  <button class="nav-icon-button" matTooltip="Logout" aria-label="Logout" (click)="logout()">
+  <span class="nav-icon-button" matTooltip="Logout" aria-label="Logout" (click)="logout()">
     <mat-icon>logout</mat-icon>
-  </button>
+  </span>
 </mat-toolbar>

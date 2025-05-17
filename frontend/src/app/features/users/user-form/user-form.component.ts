@@ -103,7 +103,9 @@ export class UserFormComponent implements OnInit {
           updateData['password'] = formValue.password;
         }
         this.userService.updateUser(this.userId, updateData).subscribe({
-          next: () => this.router.navigate(['/user-management']),
+          next: () => {
+            this.userForm.value.role === 'manager' ? this.router.navigate(['/user-management']) : this.router.navigate(['/user-profile']);
+          },
           error: (err) => console.log(err)
         });
       }
