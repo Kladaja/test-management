@@ -27,3 +27,18 @@
     margin: 0 4px;
   }
 }
+
+.error-container {
+  text-align: center;
+  margin-top: 5rem;
+
+  h1 {
+    font-size: 3rem;
+    color: #e53935;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+  }
+}

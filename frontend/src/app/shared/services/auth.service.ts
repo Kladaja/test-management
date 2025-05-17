@@ -22,14 +22,8 @@ export class AuthService {
     const body = new URLSearchParams();
     body.set('username', email);
     body.set('password', password);
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    });
-
-    return this.http.post('http://localhost:5000/app/auth/login', body, { headers: headers, withCredentials: true }).pipe(
-      tap(() => this.loggedIn.next(true))
-    );
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post('http://localhost:5000/app/auth/login', body, { headers: headers, withCredentials: true }).pipe(tap(() => this.loggedIn.next(true)));
   }
 
   register(user: User) {
@@ -39,18 +33,12 @@ export class AuthService {
     body.set('lastName', user.lastName);
     body.set('password', user.password);
     body.set('role', user.role);
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    });
-
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     return this.http.post('http://localhost:5000/app/auth/register', body, { headers: headers });
   }
 
   logout() {
-    return this.http.post('http://localhost:5000/app/auth/logout', {}, { withCredentials: true, responseType: 'text' }).pipe(
-      tap(() => this.loggedIn.next(false))
-    );
+    return this.http.post('http://localhost:5000/app/auth/logout', {}, { withCredentials: true, responseType: 'text' }).pipe(tap(() => this.loggedIn.next(false)));
   }
 
   checkAuth() {

@@ -28,10 +28,23 @@ export class UserProfileComponent implements OnInit {
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.userService.getCurrentUser().subscribe({
-      next: (data) => this.user = data,
-      error: (err) => console.error('Error fetching user', err)
-    });
+    const userId = this.route.snapshot.paramMap.get('id');
+
+    if (userId) {
+      this.userService.getUserById(userId).subscribe({
+        next: (user) => this.user = user,
+        error: (err) => console.error('Hiba a felhasználó betöltésekor:', err)
+      });
+    } else {
+      this.userService.getCurrentUser().subscribe({
+        next: (user) => this.user = user,
+        error: (err) => console.error('Hiba az aktuális felhasználó betöltésekor:', err)
+      });
+    }
+  }
+
+  updateUser(userId: string) {
+    this.router.navigate(['/user-form', userId]);
   }
 
   navigate(to: string) {

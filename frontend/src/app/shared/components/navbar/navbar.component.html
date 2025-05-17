@@ -1,12 +1,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
 
 <mat-toolbar color="primary" class="nav-container">
-  <span class="logo">Test<span class="logo-highlight">MS</span></span>
+  <span class="logo" (click)="navigate('/landing')">Test<span class="logo-highlight">MS</span></span>
 
   <span class="spacer"></span>
 
-  <button class="nav-button" (click)="navigate('/user-management')">Users</button>
-  <button class="nav-button" (click)="navigate('/project-management')">Projects</button>
+  <button *ngIf="isManager" class="nav-button" (click)="navigate('/user-management')">Users</button>
+  <button *ngIf="isManager" class="nav-button" (click)="navigate('/project-management')">Projects</button>
   <button class="nav-button" (click)="navigate('/testcycle-management')">Tests</button>
 
   <button class="nav-icon-button" matTooltip="Profile" aria-label="Profile" (click)="navigate('/user-profile')">

@@ -20,16 +20,16 @@ import { ProjectService } from '../../../shared/services/project.service';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   templateUrl: './project-management.component.html',
-  styleUrl: './project-management.component.scss'
+  styleUrl: './project-management.component.scss',
 })
 export class ProjectManagementComponent {
   projects?: Project[];
   displayedColumns: string[] = ['name', 'description', 'createdBy', 'actions'];
 
-  constructor(private projectService: ProjectService, private router: Router) { }
+  constructor(private projectService: ProjectService, private router: Router) {}
 
   ngOnInit() {
     this.projectService.getAll().subscribe({
@@ -38,7 +38,7 @@ export class ProjectManagementComponent {
       },
       error: (err) => {
         console.error(err);
-      }
+      },
     });
   }
 
@@ -54,9 +54,9 @@ export class ProjectManagementComponent {
     if (confirm('Are you sure you want to delete this project?')) {
       this.projectService.deleteProject(projectId).subscribe({
         next: () => {
-          this.projects = this.projects?.filter(r => r._id !== projectId);
+          this.projects = this.projects?.filter((r) => r._id !== projectId);
         },
-        error: (err) => console.error('Error deleting requirement', err)
+        error: (err) => console.error('Error deleting project', err),
       });
     }
   }

@@ -58,7 +58,6 @@ export const projectRoutes = (): Router => {
 
     router.delete('/deleteProject/:id', async (req: Request, res: Response) => {
         if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
-
         try {
             const deleted = await Project.findByIdAndDelete(req.params.id);
             if (!deleted) res.status(404).send('Project not found.');

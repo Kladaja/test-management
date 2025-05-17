@@ -83,6 +83,17 @@ export class ProjectDetailsComponent implements OnInit {
     this.router.navigate(['/project-form', projectId]);
   }
 
+  deleteProject(projectId: string) {
+    if (confirm('Are you sure you want to delete this project?')) {
+      this.projectService.deleteProject(projectId).subscribe({
+        next: () => {
+          this.router.navigate(['/project-management']);
+        },
+        error: (err) => console.error('Error deleting project', err)
+      });
+    }
+  }
+
   viewRequirement(req: Requirement): void {
     this.router.navigate(['/requirement-details', req._id]);
   }

@@ -1,0 +1,126 @@
+.landing-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.content-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+  .logo {
+    font-family: 'Poppins', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    font-size: 2.2rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    user-select: none;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+
+    .logo-highlight {
+      color: #ff0095;
+      font-weight: 800;
+      margin-left: 0.05em;
+      font-size: 33px;
+      font-style: italic;
+      text-shadow: 0 0 5px #ff0095b3;
+    }
+
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    transition: color 0.3s ease;
+  }
+
+.hero {
+  background: linear-gradient(135deg,#318ae4,  #193e63);
+  color: white;
+  text-align: center;
+  padding: 4rem 1rem;
+  border-radius: 8px 8px 0 0;
+
+  .hero-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .buttons {
+    button {
+      margin: 0 0.5rem;
+    }
+  }
+}
+
+.features {
+  margin-top: 2rem;
+  text-align: center;
+
+  h2 {
+    color: #193e63;
+  }
+
+  .mat-grid-tile-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: box-shadow 0.3s ease;
+  }
+}
+
+.feature-card {
+        border: 2px solid #0d47a1 !important;
+        border-radius: 8px;
+        padding: 2rem;
+    }
+
+    .feature-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .feature-icon {
+        width: 50px;
+        color: #0d47a1;
+      }
+
+      .feature-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+
+    .feature-description {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: #444 !important;
+      margin: 0;
+    }
+
+.about {
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg,#318ae4,  #193e63);
+  padding: 4rem;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #d8d8d8;
+  }
+}

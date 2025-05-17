@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { User } from '../../../shared/model/User';
 import { UserService } from '../../../shared/services/user.service';
 import { AuthService } from '../../../shared/services/auth.service';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-management',
@@ -16,39 +18,54 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatTableModule,
     MatCardModule,
-    MatIconModule
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
   ],
   templateUrl: './user-management.component.html',
-  styleUrl: './user-management.component.scss'
+  styleUrl: './user-management.component.scss',
 })
 export class UserManagementComponent {
   users?: User[];
-  displayedColumns: string[] = ['email', 'firstName', 'lastName', 'role', 'projects'];
+  displayedColumns: string[] = ['email', 'role', 'projects', 'actions'];
 
   constructor(
     private userService: UserService,
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.userService.getAll().subscribe({
       next: (data) => {
         this.users = data;
-      }, error: (err) => {
+      },
+      error: (err) => {
         console.log(err);
-      }
+      },
     });
   }
 
-  logout() {
-    this.authService.logout().subscribe({
-      next: (data) => {
-        console.log(data);
-        this.router.navigateByUrl('/login');
-      }, error: (err) => {
-        console.log(err);
-      }
-    })
+  viewUser(userId: string) {
+    this.router.navigate(['/user-profile', userId]);
+  }
+
+  updateUser(userId: string) {
+    this.router.navigate(['/user-form', userId]);
+  }
+
+  deleteUser(userId: string) {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.userService.deleteUser(userId).subscribe({
+        next: () => {
+          this.users = this.users?.filter((u) => u._id !== userId);
+        },
+        error: (err) => console.error('Error deleting user', err),
+      });
+    }
+  }
+
+  navigate(to: string) {
+    this.router.navigateByUrl(to);
   }
 }

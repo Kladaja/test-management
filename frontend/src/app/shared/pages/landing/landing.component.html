@@ -1,0 +1,62 @@
+<div class="landing-container mat-elevation-z2">
+  <section class="hero">
+    <div class="content-container">
+      <h1 class="hero-title">Welcome to <span class="logo">Test<span class="logo-highlight">MS</span></span></h1>
+      <p class="hero-subtitle">
+        Your all-in-one Test Management System to plan, execute, and track testing efficiently.
+      </p>
+      <div *ngIf="isLoggedOut" class="buttons">
+        <button mat-raised-button color="secondary" (click)="navigate('/register')">
+          Get Started
+        </button>
+        <button mat-raised-button color="secondary" (click)="navigate('/login')">
+          Log In
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="features content-container">
+    <h2>Key Features</h2>
+
+    <mat-grid-list
+      cols="3"
+      rowHeight="1:1"
+      gutterSize="16px"
+      *ngIf="isLargeScreen; else mobileGrid"
+    >
+      <mat-grid-tile *ngFor="let feature of features">
+        <div class="feature-card">
+          <div class="feature-header">
+            <mat-icon color="primary" class="feature-icon">{{ feature.icon }}</mat-icon>
+            <h3 class="feature-title">{{ feature.title }}</h3>
+          </div>
+          <p class="feature-description">{{ feature.description }}</p>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <ng-template #mobileGrid>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let feature of features">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon color="primary">{{ feature.icon }}</mat-icon>
+              {{ feature.title }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>{{ feature.description }}</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ng-template>
+  </section>
+
+  <section class="about content-container">
+    <h2>Why Choose TestMaster?</h2>
+    <p>
+      Designed for QA teams and project managers, TestMaster streamlines your testing workflow,
+      improves collaboration, and accelerates release cycles.
+    </p>
+  </section>
+
+</div>

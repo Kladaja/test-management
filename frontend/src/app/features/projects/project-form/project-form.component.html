@@ -1,19 +1,29 @@
 <div class="form-container">
   <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="project-form">
     <mat-card>
-      <mat-card-title>{{ isEditMode ? 'Edit project' : 'Create new project' }}</mat-card-title>
+      <mat-card-title>{{
+        isEditMode ? "Edit project" : "Create new project"
+      }}</mat-card-title>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Project name</mat-label>
         <input matInput formControlName="name" required />
-        <mat-hint>Enter a unique and descriptive name for your project. This is a required field.</mat-hint>
-        <mat-error *ngIf="projectForm.get('name')?.hasError('required')">Name is required!</mat-error>
+        <mat-hint
+          >Enter a unique and descriptive name for your project. This is a
+          required field.</mat-hint
+        >
+        <mat-error *ngIf="projectForm.get('name')?.hasError('required')"
+          >Name is required!</mat-error
+        >
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="description" rows="4"></textarea>
-        <mat-hint>Provide a brief summary or details about the project. This helps clarify the project’s purpose and scope.</mat-hint>
+        <mat-hint
+          >Provide a brief summary or details about the project. This helps
+          clarify the project’s purpose and scope.</mat-hint
+        >
       </mat-form-field>
 
       <div class="buttons">

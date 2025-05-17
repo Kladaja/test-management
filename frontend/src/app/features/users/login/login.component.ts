@@ -38,7 +38,7 @@ export class LoginComponent {
         next: (data) => {
           if (data) {
             console.log(data);
-            this.router.navigateByUrl('/user-management');
+            this.router.navigateByUrl('/user-profile');
           }
         }, error: (err) => {
           console.log(err);

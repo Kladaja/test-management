@@ -5,7 +5,7 @@ import { User } from '../model/User';
 export const authRoutes = (passport: PassportStatic): Router => {
     const router = Router();
 
-    router.post('/login', (req, res, next) => {
+    router.post('/login', (req: Request, res: Response, next) => {
         passport.authenticate('local', (error: string | null, user: typeof User) => {
             if (error) return res.status(500).send(error);
             if (!user) return res.status(400).send('User not found.');
@@ -16,7 +16,7 @@ export const authRoutes = (passport: PassportStatic): Router => {
         })(req, res, next);
     });
 
-    router.post('/register', async (req, res) => {
+    router.post('/register', async (req: Request, res: Response) => {
         const { email, password, firstName, lastName, role } = req.body;
         const user = new User({ email, password, firstName, lastName, role });
         try {
@@ -27,7 +27,7 @@ export const authRoutes = (passport: PassportStatic): Router => {
         }
     });
 
-    router.post('/logout', (req, res) => {
+    router.post('/logout', (req: Request, res: Response) => {
         if (req.isAuthenticated()) {
             req.logout(err => {
                 if (err) return res.status(500).send(err);
