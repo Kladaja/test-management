@@ -39,16 +39,22 @@ export class ProjectManagementComponent {
 
   ngOnInit() {
     this.userService.getCurrentUser().subscribe({
-      next: (user) => this.user = user,
+      next: (user) => {
+        this.user = user;
+        this.projectService.getAll().subscribe({
+          next: (data) => {
+            if (this.user?.role === 'manager') {
+              this.projects = data;
+            } else {
+              this.projects = data.filter(project =>
+                project.testers.some(tester => tester._id === this.user?._id)
+              );
+            }
+          },
+          error: (err) => console.error(err),
+        });
+      },
       error: () => this.user = null
-    });
-    this.projectService.getAll().subscribe({
-      next: (data) => {
-        this.projects = data;
-      },
-      error: (err) => {
-        console.error(err);
-      },
     });
   }
 

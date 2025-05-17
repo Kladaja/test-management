@@ -37,7 +37,6 @@ export class LoginComponent {
       this.authService.login(this.email, this.password).subscribe({
         next: (data) => {
           if (data) {
-            console.log(data);
             this.router.navigateByUrl('/user-profile');
           }
         }, error: (err) => {

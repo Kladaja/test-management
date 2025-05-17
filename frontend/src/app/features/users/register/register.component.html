@@ -34,15 +34,6 @@
         <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('mustMatch')">Passwords must match.</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Role</mat-label>
-        <mat-select formControlName="role" required>
-          <mat-option value="tester">Tester</mat-option>
-          <mat-option value="manager">Test Manager</mat-option>
-        </mat-select>
-        <mat-error *ngIf="registerForm.get('role')?.hasError('required')">Role is required.</mat-error>
-      </mat-form-field>
-
       <div class="buttons">
         <button mat-raised-button color="primary" type="submit">Sign Up</button>
         <button mat-button color="warn" type="button" (click)="navigate('/login')">Back</button>

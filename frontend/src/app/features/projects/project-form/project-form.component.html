@@ -26,6 +26,41 @@
         >
       </mat-form-field>
 
+      <h2>Assign Testers</h2>
+      <p class="info-text">Use the search box to find users by their username or email address. Select one or more users from the results to assign them to the project and manage their access efficiently.</p>
+
+      <div class="assign-testers">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Search users</mat-label>
+            <input
+              matInput
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="onSearch($event)"
+              [ngModelOptions]="{ standalone: true }"
+            />
+        </mat-form-field>
+
+        <mat-list>
+          <mat-list-item *ngFor="let user of filteredUsers">
+            <span class="user-text">{{ user.firstName }} {{ user.lastName }} ({{ user.email }})</span>
+            <button mat-button color="primary" type="button" (click)="addTester(user)">
+              Add
+            </button>
+          </mat-list-item>
+        </mat-list>
+
+        <mat-chip-set>
+          <mat-chip
+            *ngFor="let tester of selectedTesters"
+            removable
+            (removed)="removeTester(tester)"
+          >
+            <span class="user-text">{{ tester.firstName }} {{ tester.lastName }}</span>
+            <mat-icon matChipRemove><span class="chip-remove">cancel</span></mat-icon>
+          </mat-chip>
+        </mat-chip-set>
+      </div>
+
       <div class="buttons">
         <button mat-raised-button color="primary" type="submit">Submit</button>
       </div>

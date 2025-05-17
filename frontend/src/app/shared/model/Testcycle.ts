@@ -7,6 +7,6 @@ export interface Testcycle {
     name: string;
     description?: string;
     project: Project;
-    testcases: [Testcase];
+    testcases: Testcase[];
     createdBy: User;
 }

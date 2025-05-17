@@ -7,7 +7,14 @@ export const testcycleRoutes = (): Router => {
     router.get('/getAllTestcycles', async (req: Request, res: Response) => {
         if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         try {
-            const testcycles = await Testcycle.find().populate('createdBy', 'email').populate('project').exec();
+            const testcycles = await Testcycle.find()
+                .populate({
+                    path: 'project',
+                    populate: { path: 'testers', select: 'email firstName lastName' }
+                })
+                .populate('createdBy', 'email')
+                .populate('testcases')
+                .exec();
             res.status(200).json(testcycles);
         } catch {
             res.status(500).send('Error fetching testcycles.');

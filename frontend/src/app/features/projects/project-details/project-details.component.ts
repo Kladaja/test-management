@@ -9,6 +9,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 
 import { ProjectService } from '../../../shared/services/project.service';
 import { Project } from '../../../shared/model/Project';
@@ -29,7 +30,8 @@ import { UserService } from '../../../shared/services/user.service';
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatListModule
   ],
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.scss'
@@ -61,6 +63,7 @@ export class ProjectDetailsComponent implements OnInit {
         next: (data) => {
           this.project = data;
           this.loadRequirements();
+          console.log(this.project)
         },
         error: (err) => console.error('Error fetching project', err)
       });

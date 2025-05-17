@@ -7,7 +7,7 @@ export const projectRoutes = (): Router => {
     router.get('/getAllProjects', async (req: Request, res: Response) => {
         if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         try {
-            const projects = await Project.find().populate('createdBy', 'email').exec();
+            const projects = await Project.find().populate('createdBy', 'email').populate('testers', 'email firstName lastName role').exec();
             res.status(200).json(projects);
         } catch {
             res.status(500).send('Error fetching projects.');
@@ -17,7 +17,7 @@ export const projectRoutes = (): Router => {
     router.get('/getProjectById/:id', async (req: Request, res: Response) => {
         if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         try {
-            const project = await Project.findById(req.params.id).populate('createdBy', 'email').exec();
+            const project = await Project.findById(req.params.id).populate('createdBy', 'email').populate('testers', 'email firstName lastName role').exec();
             if (!project) res.status(404).send('Project not found.');
             res.status(200).json(project);
         } catch {
@@ -28,12 +28,13 @@ export const projectRoutes = (): Router => {
     router.post('/addProject', async (req: Request, res: Response) => {
         if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
         const { name, description } = req.body;
+        const testers = req.body.testers ? JSON.parse(req.body.testers) : [];
         try {
             const project = new Project({
                 name,
                 description,
                 createdBy: (req.user as any)._id,
-                testers: []
+                testers: Array.isArray(testers) ? testers : []
             });
             const data = await project.save();
             res.status(200).send(data);
@@ -44,10 +45,16 @@ export const projectRoutes = (): Router => {
 
     router.put('/updateProject/:id', async (req: Request, res: Response) => {
         if (!req.isAuthenticated()) res.status(401).send('Unauthorized');
+        const { name, description } = req.body;
+        const testers = req.body.testers ? JSON.parse(req.body.testers) : [];
         try {
             const updated = await Project.findByIdAndUpdate(
                 req.params.id,
-                { name: req.body.name, description: req.body.description },
+                {
+                    name,
+                    description,
+                    testers: Array.isArray(testers) ? testers : []
+                },
                 { new: true }
             );
             res.status(200).json(updated);
@@ -55,6 +62,7 @@ export const projectRoutes = (): Router => {
             res.status(500).send('Error updating project.');
         }
     });
+
 
     router.delete('/deleteProject/:id', async (req: Request, res: Response) => {
         if (!req.isAuthenticated()) res.status(401).send('Unauthorized');

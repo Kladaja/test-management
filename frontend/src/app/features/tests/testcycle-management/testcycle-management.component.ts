@@ -9,6 +9,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { Testcycle } from '../../../shared/model/Testcycle';
 import { TestcycleService } from '../../../shared/services/testcycle.service';
+import { User } from '../../../shared/model/User';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-testcycle-management',
@@ -26,19 +28,30 @@ import { TestcycleService } from '../../../shared/services/testcycle.service';
   styleUrl: './testcycle-management.component.scss'
 })
 export class TestcycleManagementComponent {
+  user: User | null = null;
   testcycles?: Testcycle[];
   displayedColumns: string[] = ['name', 'description', 'createdBy', 'actions'];
 
-  constructor(private testcycleService: TestcycleService, private router: Router) { }
+  constructor(
+    private testcycleService: TestcycleService,
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.testcycleService.getAll().subscribe({
-      next: (data) => {
-        this.testcycles = data;
+    this.userService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.user = user;
+        this.testcycleService.getAll().subscribe({
+          next: (data) => {
+            this.testcycles = data.filter(tc =>
+              tc.project.testers?.some(tester => tester._id === this.user?._id)
+            );
+          },
+          error: (err) => console.error('Error fetching test cycles', err)
+        });
       },
-      error: (err) => {
-        console.error(err);
-      }
+      error: (err) => console.error('Error fetching user', err)
     });
   }
 

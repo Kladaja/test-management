@@ -23,11 +23,8 @@ export class ProjectService {
     const body = new URLSearchParams();
     body.set('name', project.name);
     body.set('description', project.description || '');
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    });
-
+    body.set('testers', JSON.stringify(project.testers || []));
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     return this.http.post('http://localhost:5000/app/projects/addProject', body, { headers: headers, withCredentials: true });
   }
 
@@ -35,11 +32,8 @@ export class ProjectService {
     const body = new URLSearchParams();
     body.set('name', project.name);
     body.set('description', project.description || '');
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    });
-
+    body.set('testers', JSON.stringify(project.testers || []));
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     return this.http.put(`http://localhost:5000/app/projects/updateProject/${id}`, body.toString(), { headers, withCredentials: true });
   }
 

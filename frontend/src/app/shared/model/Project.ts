@@ -5,5 +5,5 @@ export interface Project {
     name: string;
     description?: string;
     createdBy: User;
-    testers: [User];
+    testers: User[];
 }
