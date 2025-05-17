@@ -35,6 +35,7 @@ export class UserService {
     body.set('firstName', user.firstName);
     body.set('lastName', user.lastName);
     body.set('email', user.email);
+    body.set('role', user.role);
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });

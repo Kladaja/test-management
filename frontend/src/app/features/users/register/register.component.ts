@@ -6,10 +6,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { MatOptionModule } from '@angular/material/core';
 
 import { AuthService } from '../../../shared/services/auth.service';
-import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-register',
@@ -20,9 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatOptionModule
+    MatButtonModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'

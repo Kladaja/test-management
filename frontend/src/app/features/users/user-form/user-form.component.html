@@ -34,6 +34,15 @@
         <mat-error *ngIf="userForm.get('confirmPassword')?.hasError('mustMatch')">Passwords must match.</mat-error>
       </mat-form-field>
 
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" required>
+          <mat-option value="tester">Tester</mat-option>
+          <mat-option value="manager">Test Manager</mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.get('role')?.hasError('required')">Role is required.</mat-error>
+      </mat-form-field>
+
       <div class="buttons">
         <button mat-raised-button color="primary" type="submit">Submit</button>
       </div>

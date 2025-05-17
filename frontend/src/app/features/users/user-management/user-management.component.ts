@@ -9,7 +9,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { User } from '../../../shared/model/User';
 import { UserService } from '../../../shared/services/user.service';
-import { AuthService } from '../../../shared/services/auth.service';
+import { Project } from '../../../shared/model/Project';
+import { ProjectService } from '../../../shared/services/project.service';
 
 @Component({
   selector: 'app-user-management',
@@ -20,25 +21,41 @@ import { AuthService } from '../../../shared/services/auth.service';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule,
+    MatTooltipModule
   ],
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.scss',
 })
 export class UserManagementComponent {
   users?: User[];
+  allProjects: Project[] = [];
   displayedColumns: string[] = ['email', 'role', 'projects', 'actions'];
 
   constructor(
     private userService: UserService,
-    private authService: AuthService,
+    private projectService: ProjectService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.userService.getAll().subscribe({
-      next: (data) => {
-        this.users = data;
+      next: (users) => {
+        this.projectService.getAll().subscribe({
+          next: (projects) => {
+            // Csak azok a projektek, ahol a user szerepel a testers tömbben
+            this.users = users.map(user => {
+              const userProjects = projects.filter(p =>
+                p.testers?.some(t => t._id === user._id)
+              );
+              return {
+                ...user,
+                projects: userProjects,
+                projectNames: userProjects.map(p => p.name).join(', ')
+              };
+            });
+          },
+          error: (err) => console.error('Error loading projects', err)
+        });
       },
       error: (err) => {
         console.log(err);

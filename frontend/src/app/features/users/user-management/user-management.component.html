@@ -39,7 +39,7 @@
           *matCellDef="let user"
           [ngClass]="user.role == 'manager' ? 'manager-label' : 'tester-label'"
         >
-          <i>// TODO</i>
+          <span>{{ user.projectNames || '—' }}</span>
         </mat-cell>
       </ng-container>
 
