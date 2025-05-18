@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
@@ -35,9 +35,18 @@ export class ProjectManagementComponent {
   constructor(
     private projectService: ProjectService,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
+    this.userService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.user = user;
+        this.cdr.detectChanges();
+      },
+      error: () => this.user = null
+    });
     this.userService.getCurrentUser().subscribe({
       next: (user) => {
         this.user = user;
@@ -59,6 +68,7 @@ export class ProjectManagementComponent {
   }
 
   get isManager(): boolean {
+    console.log(this.user?.role)
     return this.user?.role === 'manager';
   }
 

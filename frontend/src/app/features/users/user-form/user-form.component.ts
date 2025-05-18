@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -11,6 +11,7 @@ import { MatOptionModule } from '@angular/material/core';
 
 import { UserService } from '../../../shared/services/user.service';
 import { AuthService } from '../../../shared/services/auth.service';
+import { User } from '../../../shared/model/User';
 
 @Component({
   selector: 'app-user-form',
@@ -28,6 +29,7 @@ import { AuthService } from '../../../shared/services/auth.service';
   styleUrl: './user-form.component.scss'
 })
 export class UserFormComponent implements OnInit {
+  user: User | null = null;
   userForm!: FormGroup;
   isEditMode = false;
   userId?: string;
@@ -41,18 +43,30 @@ export class UserFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.isEditMode = true;
-        this.userId = id;
-        this.userService.getUserById(id).subscribe(user => {
-          this.initForm(user);
+    this.userService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.user = user;
+        this.route.paramMap.subscribe(params => {
+          const id = params.get('id');
+          if (id) {
+            this.isEditMode = true;
+            this.userId = id;
+            this.userService.getUserById(id).subscribe(user => {
+              this.initForm(user);
+            });
+          } else {
+            this.initForm();
+          }
         });
-      } else {
-        this.initForm();
+      },
+      error: () => {
+        this.user = null;
       }
     });
+  }
+
+  get isManager(): boolean {
+    return this.user?.role === 'manager';
   }
 
   initForm(user?: any) {
@@ -62,12 +76,11 @@ export class UserFormComponent implements OnInit {
       lastName: [user?.lastName || ''],
       password: ['', this.isEditMode ? [] : [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', this.isEditMode ? [] : [Validators.required]],
-      role: [user?.role || '', Validators.required]
+      role: [user?.role]
     }, {
       validator: this.mustMatch('password', 'confirmPassword')
     });
   }
-
 
   mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
@@ -87,9 +100,8 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.userForm.value)
     if (this.userForm.valid) {
-      const formValue = this.userForm.value;
+      const formValue = this.userForm.getRawValue();;
       if (!this.isEditMode) {
         this.authService.register(formValue).subscribe({
           next: () => this.router.navigate(['/user-management']),
@@ -108,7 +120,15 @@ export class UserFormComponent implements OnInit {
         }
         this.userService.updateUser(this.userId, updateData).subscribe({
           next: () => {
-            this.userForm.value.role === 'manager' ? this.router.navigate(['/user-management']) : this.router.navigate(['/user-profile']);
+            if (this.userForm.value.role === 'manager') {
+              this.router.navigate(['/user-management']);
+            } else {
+              this.userService.getCurrentUser().subscribe({
+                next: (user) => {
+                  this.router.navigate(['/user-profile']);
+                }
+              });
+            }
           },
           error: (err) => console.log(err)
         });

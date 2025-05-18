@@ -18,9 +18,9 @@
         <mat-cell *matCellDef="let testcycle"> {{ testcycle.description }} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="createdBy">
-        <mat-header-cell *matHeaderCellDef> Created By </mat-header-cell>
-        <mat-cell *matCellDef="let testcycle"> {{ testcycle.createdBy.email }} </mat-cell>
+      <ng-container matColumnDef="project">
+        <mat-header-cell *matHeaderCellDef> Project </mat-header-cell>
+        <mat-cell *matCellDef="let testcycle"> {{ testcycle.project.name }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="actions">

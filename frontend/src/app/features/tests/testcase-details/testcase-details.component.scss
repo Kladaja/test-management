@@ -11,3 +11,9 @@ mat-header-cell {
   background-color: #e0e0e0;
   font-weight: 600;
 }
+
+.narrow-column {
+  width: 40px; 
+  max-width: 40px;
+  white-space: nowrap;
+}

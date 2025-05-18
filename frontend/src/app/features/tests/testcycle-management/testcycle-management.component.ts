@@ -30,7 +30,7 @@ import { UserService } from '../../../shared/services/user.service';
 export class TestcycleManagementComponent {
   user: User | null = null;
   testcycles?: Testcycle[];
-  displayedColumns: string[] = ['name', 'description', 'createdBy', 'actions'];
+  displayedColumns: string[] = ['name', 'description', 'project', 'actions'];
 
   constructor(
     private testcycleService: TestcycleService,
@@ -45,8 +45,9 @@ export class TestcycleManagementComponent {
         this.testcycleService.getAll().subscribe({
           next: (data) => {
             this.testcycles = data.filter(tc =>
-              tc.project.testers?.some(tester => tester._id === this.user?._id)
+              tc?.project?.testers?.some(tester => tester._id === this.user?._id)
             );
+            console.log("onInit: ", this.testcycles)
           },
           error: (err) => console.error('Error fetching test cycles', err)
         });

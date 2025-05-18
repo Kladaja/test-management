@@ -24,8 +24,8 @@
         <h2>Steps</h2>
         <mat-table mat-table [dataSource]="dataSource" class="full-width mat-elevation-z2">
           <ng-container matColumnDef="index">
-            <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
-            <mat-cell *matCellDef="let step; let i = index">{{ i + 1 }}</mat-cell>
+            <mat-header-cell *matHeaderCellDef class="narrow-column">#</mat-header-cell>
+            <mat-cell *matCellDef="let step; let i = index" class="narrow-column">{{ i + 1 }}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="step">
@@ -39,8 +39,8 @@
           </ng-container>
 
           <ng-container matColumnDef="remove">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let step; let i = index">
+            <mat-header-cell *matHeaderCellDef class="remove-column"></mat-header-cell>
+            <mat-cell *matCellDef="let step; let i = index" class="remove-column">
               <button mat-icon-button color="warn" (click)="removeStep(i)">
                 <mat-icon>delete</mat-icon>
               </button>

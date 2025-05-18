@@ -63,7 +63,6 @@ export class ProjectDetailsComponent implements OnInit {
         next: (data) => {
           this.project = data;
           this.loadRequirements();
-          console.log(this.project)
         },
         error: (err) => console.error('Error fetching project', err)
       });

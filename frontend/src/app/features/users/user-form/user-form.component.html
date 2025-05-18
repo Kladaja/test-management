@@ -1,9 +1,7 @@
 <div class="form-container">
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+  <form *ngIf="userForm" [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
     <mat-card>
-      <mat-card-title>{{
-        isEditMode ? "Edit user" : "Create new user"
-      }}</mat-card-title>
+      <mat-card-title>{{ isEditMode ? "Edit user" : "Create new user" }}</mat-card-title>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
@@ -38,9 +36,8 @@
         <mat-label>Role</mat-label>
         <mat-select formControlName="role" required>
           <mat-option value="tester">Tester</mat-option>
-          <mat-option value="manager">Test Manager</mat-option>
+          <mat-option value="manager" *ngIf="isManager">Test Manager</mat-option>
         </mat-select>
-        <mat-error *ngIf="userForm.get('role')?.hasError('required')">Role is required.</mat-error>
       </mat-form-field>
 
       <div class="buttons">

@@ -36,9 +36,7 @@ export class UserService {
     body.set('lastName', user.lastName);
     body.set('email', user.email);
     body.set('role', user.role);
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', });
     return this.http.put(
       `http://localhost:5000/app/users/updateUser/${id}`,
       body.toString(),
